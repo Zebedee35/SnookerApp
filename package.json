@@ -52,6 +52,7 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.1.2",
     "react-dom": "16.13.1",
+    "react-native-storybook-loader": "^2.0.2",
     "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
