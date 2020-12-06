@@ -1,4 +1,5 @@
-import { RouteProp, StackNavigationState } from '@react-navigation/native'
+import { RouteProp } from '@react-navigation/native'
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 
 type RootStackParamList = {
@@ -10,7 +11,7 @@ type RootStackParamList = {
 }
 
 type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>
+type HomeScreenNavigationProp = BottomTabNavigationProp<RootStackParamList, 'Home'>
 
 type HomeProps = {
   route: HomeScreenRouteProp,
