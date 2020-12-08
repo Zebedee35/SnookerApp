@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, RefreshControl, SectionList, StatusBar } from 'react-native'
+import { RefreshControl, SectionList, StatusBar } from 'react-native'
 import snrkApi from '../api/snrkApi'
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
-import { IEvent, IRound } from '../types/apiTypes'
-
-import { HomeProps } from '../types/navTypes'
-
-import bg_home from '../assets/bg_home.jpg'
 import ScoreListHeader from '../components/score-list-header'
+import { IEvent, IRound } from '../types/apiTypes'
+import { HomeProps } from '../types/navTypes'
+import bg_home from '../assets/bg_home.jpg'
 
 function HomeScreen({ route, navigation }: HomeProps) {
   const [event, setEvent] = useState<IEvent>()
