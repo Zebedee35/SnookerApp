@@ -63,7 +63,7 @@ function HomeScreen({ route, navigation }: HomeProps) {
 
         renderItem={({ item }) => {
           if (item.round === "15" || item.round === "14") {
-            return <ScoreListItem item={item} />
+            return <ScoreListItem item={item} bigSize={true} />
           }
           return <ScoreListItem item={item} />
         }
