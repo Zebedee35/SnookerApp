@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, SectionList, StatusBar } from 'react-native'
+import { FlatList, RefreshControl, SectionList, StatusBar } from 'react-native'
 import snrkApi from '../api/snrkApi'
 
 import Box from '../components/box'
@@ -17,6 +17,10 @@ function HomeScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const onRefresh = React.useCallback(() => {
+    getCurrentTour()
+  }, [loading])
 
   const getCurrentTour = async () => {
     try {
@@ -78,6 +82,9 @@ function HomeScreen({ route, navigation }: HomeProps) {
             currency={currency} />
         )}
         style={{ flex: 1 }}
+
+        refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}
+
       />
     </Box >
   )
