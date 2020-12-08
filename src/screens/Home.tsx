@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { RefreshControl, SectionList, StatusBar } from 'react-native'
-import snrkApi from '../api/snrkApi'
+import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
@@ -23,7 +23,7 @@ function HomeScreen({ route, navigation }: HomeProps) {
   const getCurrentTour = async () => {
     try {
       setLoading(true)
-      const response = await snrkApi.get('tournament', {})
+      const response = await snkrApi.get('tournament', {})
       setEvent(response.data.event)
       setRounds(response.data.rounds)
       setLoading(false)
