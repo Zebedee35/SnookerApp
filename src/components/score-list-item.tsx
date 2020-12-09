@@ -104,7 +104,7 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
             <PlayerPhoto style={{ width: bigSize ? 80 : 44, height: bigSize ? 80 : 44 }} imgUri={item.players[1].photoURL} />
 
             <Box style={{ width: bigSize ? 15 : 44, height: bigSize ? 140 : 82, zIndex: 1, position: 'absolute', alignItems: 'center', justifyContent: 'center' }} >
-              <Label style={{ backgroundColor: '#000000', color: '#FFFFFF', fontSize: 10, width: 28, textAlign: 'center' }}># {item.players[0].rank}</Label>
+              <Label style={{ backgroundColor: '#000000', color: '#FFFFFF', fontSize: 10, width: 28, textAlign: 'center' }}># {item.players[1].rank}</Label>
             </Box>
           </Box>
         </Box>
