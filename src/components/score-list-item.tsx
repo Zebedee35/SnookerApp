@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
-import CenterView from '../../storybook/stories/CenterView'
 
 import { IRound, IMatch } from '../types/apiTypes'
 import Utils from '../utils/Utils'
