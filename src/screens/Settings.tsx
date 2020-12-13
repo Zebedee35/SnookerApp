@@ -1,47 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Switch, SectionList, StatusBar, ScrollView, StyleSheet, FlatList } from 'react-native'
-import snkrApi from '../api/snkrApi'
+import React, { useState } from 'react'
+import { Switch, StatusBar, StyleSheet, FlatList } from 'react-native'
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import { HomeProps } from '../types/navTypes'
 import Label from '../components/label'
 import bg_settings from '../assets/bg_settings.jpg'
+import SettingsItem from '../components/settings-list-item'
+
 import xTheme from '../utils/xTheme'
 
 import RadioGroup, { RadioGroupItem } from '../components/radioGroup'
-
+import { FeedbackIcon, ShareIcon, SnookerOrg, StarIcon, WebIcon } from '../components/icons'
 
 function SettingsScreen({ route, navigation }: HomeProps) {
-  const [data, setData] = useState<ISettingsGroup[]>([])
-
-  function BigIconAndDetailItem(title: string, detail: string, link: string) {
-    return <Box style={{ height: 70, flexDirection: 'row', alignItems: 'center' }}>
-      <Box style={{ marginLeft: 10, marginRight: 5, backgroundColor: xTheme.colors.yellow, height: 50, width: 50 }}></Box>
-      <Box style={{ marginLeft: 10, flex: 1 }}>
-        <Box>
-          <Label style={{ fontSize: 17, }}>{title}</Label>
-          <Label style={{ fontSize: 15, color: xTheme.colors.detail }}>{detail}</Label>
-        </Box>
-      </Box>
-      <Box style={{ width: 25, height: 25, backgroundColor: xTheme.colors.detail, marginRight: 15 }}></Box>
-    </Box>
-  }
-
-  function SmallIconItem(title: string, detail: string, link: string) {
-    return <Box style={{ height: 48, flexDirection: 'row', alignItems: 'center' }}>
-      <Box style={{ marginLeft: 10, marginRight: 5, backgroundColor: xTheme.colors.yellow, height: 30, width: 30 }}></Box>
-      <Box style={{ marginLeft: 10, flex: 1 }}>
-        <Box>
-          <Label style={{ fontSize: 17, }}>{title}</Label>
-          {detail === ''
-            ? <></>
-            : <Label style={{ fontSize: 15, color: xTheme.colors.detail }}>{detail}</Label>}
-        </Box>
-      </Box>
-      <Box style={{ width: 25, height: 25, backgroundColor: xTheme.colors.detail, marginRight: 15 }}></Box>
-    </Box>
-  }
   function SwitchItem(title: string, currValue: boolean) {
     return <Box style={{ height: 48, flexDirection: 'row', alignItems: 'center' }}>
       <Box style={{ marginLeft: 10, flex: 1 }}>
@@ -99,7 +71,9 @@ function SettingsScreen({ route, navigation }: HomeProps) {
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>OTHER</Label>
                 </Box>
-                {SmallIconItem('Change App Icon', '', '')}
+                <SettingsItem title='Change App Icon'>
+                  <StarIcon width={25} height={25} />
+                </SettingsItem>
                 {SwitchItem('Dark Mode', true)}
                 {SwitchItem('Hide TBD Matches', true)}
               </Box>;
@@ -108,27 +82,25 @@ function SettingsScreen({ route, navigation }: HomeProps) {
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>OUR APPS</Label>
                 </Box>
-                {BigIconAndDetailItem('FilmBox', 'Smart Movie Manager', '')}
-                {BigIconAndDetailItem('ContactName', 'Update Your Contacts', '')}
+                <SettingsItem title='FilmBox' detail='Smart Movie Manager' bigSize={true}></SettingsItem>
+                <SettingsItem title='ContactName' detail='Update Your Contacts' bigSize={true}></SettingsItem>
               </Box>
             case 3:
               return <Box>
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>ABOUT US</Label>
                 </Box>
-                {SmallIconItem('Rate Us', '', '')}
-                {SmallIconItem('Share App', '', '')}
-                {SmallIconItem('Give Feedback', '', '')}
-                {SmallIconItem('35coders.com', 'Tayfun Susamcioglu', '')}
-
+                <SettingsItem title='Rate Us'><StarIcon /></SettingsItem>
+                <SettingsItem title='Share App'><ShareIcon /></SettingsItem>
+                <SettingsItem title='Give Feedback'><FeedbackIcon /></SettingsItem>
+                <SettingsItem title='35coders.com' detail='Tayfun Susamcioglu'><WebIcon /></SettingsItem>
               </Box>
             case 4:
               return <Box>
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>SPECIAL THANKS</Label>
                 </Box>
-                {SmallIconItem('Hermund Årdalen', 'Snooker.org', '')}
-
+                <SettingsItem title='Hermund Årdalen' detail='Snooker.org'><SnookerOrg /></SettingsItem>
               </Box>
 
             default:

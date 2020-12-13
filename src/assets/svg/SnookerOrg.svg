@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="17px" viewBox="0 0 24 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>SnookerOrg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="35.1028627%" cy="28.6006806%" fx="35.1028627%" fy="28.6006806%" r="80.2441045%" id="radialGradient-1">
+            <stop stop-color="#FB7272" offset="0%"></stop>
+            <stop stop-color="#900000" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SnookerOrg" transform="translate(0.000000, -4.181818)">
+            <ellipse id="Oval-3" fill="#D8D8D8" cx="7.52" cy="18.72" rx="6.56" ry="2.08"></ellipse>
+            <ellipse id="Oval-3-Copy" fill="#000000" cx="16.8" cy="18.08" rx="6.88" ry="1.76"></ellipse>
+            <circle id="Oval-4" fill="url(#radialGradient-1)" cx="11.36" cy="12" r="7.52"></circle>
+        </g>
+    </g>
+</svg>

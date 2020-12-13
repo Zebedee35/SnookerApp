@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "pod": "cd ios; pod install; cd ..",
-    "svgr": "svgr ./src/assets/icons -d ./src/components/icons --native --typescript --svg-props 'className=' "
+    "svgr": "svgr ./src/assets/svg -d ./src/components/icons --native --typescript --svg-props 'className=' "
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
