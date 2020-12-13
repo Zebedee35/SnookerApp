@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 
-import { IRound, IMatch } from '../types/apiTypes'
+import { IMatch } from '../types/apiTypes'
 import Utils from '../utils/Utils'
 import xTheme from '../utils/xTheme'
 import Box from './box'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { RefreshControl, ScrollView, SectionList, StatusBar } from 'react-native'
+import { RefreshControl, ScrollView, SectionList, StatusBar, Image } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
@@ -59,7 +59,7 @@ function LiveScreen({ route, navigation }: HomeProps) {
         ? <ScrollView style={{ flex: 1 }}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
           <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
-            {/* picture will come here. */}
+            <Image source={require('../assets/closed.png')} />
             <Label style={{ fontSize: 16 }}>There is no live matches now!</Label>
           </Box>
         </ScrollView>
