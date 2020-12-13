@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "pod": "cd ios; pod install; cd .."
+    "pod": "cd ios; pod install; cd ..",
+    "svgr": "svgr ./src/assets/icons -d ./src/components/icons --native --typescript --svg-props 'className=' "
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -22,7 +23,8 @@
     "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
-    "react-native-screens": "^2.15.0"
+    "react-native-screens": "^2.15.0",
+    "react-native-svg": "^12.1.0"
   },
   "format": "prettier --write 'src/**/*.{ts,tsx}' && yarn lint:eslint --fix",
   "format:check": "prettier -c 'src/**/*.{ts,tsx}'",
@@ -40,6 +42,7 @@
     "@storybook/addon-links": "^4.1.16",
     "@storybook/addons": "^4.1.16",
     "@storybook/react-native": "^4.1.16",
+    "@svgr/cli": "^5.5.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.37",
     "@types/react-test-renderer": "^16.9.4",
