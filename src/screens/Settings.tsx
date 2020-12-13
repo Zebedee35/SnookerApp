@@ -9,7 +9,6 @@ import Label from '../components/label'
 import bg_settings from '../assets/bg_settings.jpg'
 import xTheme from '../utils/xTheme'
 
-import { ISettingsGroup, ISettingsItem } from '../types/apiTypes'
 import RadioGroup, { RadioGroupItem } from '../components/radioGroup'
 
 

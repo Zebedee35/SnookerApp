@@ -77,24 +77,3 @@ export interface IPlayer {
   pro?: string, // "2005"
   photoURL?: string, // "http://35coders.com/common/snooker/img/judd-trump.jpg"
 }
-
-// export interface ISettingsGroup {
-//   title: string,
-//   footer?: string,
-//   data?: ISettingsItem[]
-// }
-
-// export interface ISettingsItem {
-//   id: string,
-//   title: string,
-//   detail?: string,
-//   accessory?: 'RadioBox' | 'CheckBox',
-//   checkValue?: boolean,
-//   height?: number,
-//   icon?: ISettingsIcon,
-// }
-
-// export interface ISettingsIcon {
-//   size?: number,
-//   uri?: string,
-// }

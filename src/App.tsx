@@ -12,6 +12,9 @@ import RankScreen from './screens/Rank'
 import SettingsScreen from './screens/Settings'
 import SeasonScreen from './screens/Season'
 
+import { HomeIcon, SeasonIcon, SettingsIcon, RankingIcon, LiveIcon } from './components/icons/index'
+import xTheme from './utils/xTheme'
+
 const Tab = createBottomTabNavigator();
 
 
@@ -21,28 +24,28 @@ const App = () => {
       <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name='Seasons' component={SeasonScreen} options={{
           tabBarIcon: ({ color, size }) => (
-            <Image source={require('./assets/Season.png')} />
+            <SeasonIcon color={xTheme.colors.score} />
           )
         }} />
         <Tab.Screen name='Live' component={LiveScreen} options={{
           tabBarIcon: ({ color, size }) => (
-            <Image source={require('./assets/Live.png')} />
+            <LiveIcon color={xTheme.colors.score} />
           )
         }} />
         <Tab.Screen name='Home' component={HomeScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Image source={require('./assets/Home.png')} />
+              <HomeIcon color={xTheme.colors.score} />
             )
           }} />
         <Tab.Screen name='Rankings' component={RankScreen} options={{
           tabBarIcon: ({ color, size }) => (
-            <Image source={require('./assets/Ranking.png')} />
+            <RankingIcon color={xTheme.colors.score} />
           )
         }} />
         <Tab.Screen name='Settings' component={SettingsScreen} options={{
           tabBarIcon: ({ color, size }) => (
-            <Image source={require('./assets/Settings.png')} />
+            <SettingsIcon color={xTheme.colors.score} />
           )
         }} />
       </Tab.Navigator>

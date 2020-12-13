@@ -1,0 +1,7 @@
+export { default as HomeIcon } from './HomeIcon'
+export { default as LiveIcon } from './LiveIcon'
+export { default as NextIcon } from './NextIcon'
+export { default as RankingIcon } from './RankingIcon'
+export { default as SeasonIcon } from './SeasonIcon'
+export { default as SettingsIcon } from './SettingsIcon'
+export { default as TickIcon } from './TickIcon'
