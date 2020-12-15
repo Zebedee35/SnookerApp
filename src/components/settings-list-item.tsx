@@ -13,13 +13,13 @@ const styles = StyleSheet.create({
 type TSettingsItemProps = {
   title: string,
   detail?: string,
-  link?: string
-  bigSize?: boolean
+  bigSize?: boolean,
+  onPress?: () => void
 }
 
-const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, link, children }) => {
+const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, onPress, children }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Box style={{ height: bigSize ? 70 : 48, flexDirection: 'row', alignItems: 'center' }}>
         <Box style={{ marginLeft: 10, marginRight: 5, height: bigSize ? 64 : 30, width: bigSize ? 64 : 30 }}>
           {children}

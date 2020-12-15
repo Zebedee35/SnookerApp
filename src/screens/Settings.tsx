@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Switch, StatusBar, StyleSheet, FlatList } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StatusBar, StyleSheet, FlatList, Linking, Share, Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
@@ -7,6 +8,7 @@ import { HomeProps } from '../types/navTypes'
 import Label from '../components/label'
 import bg_settings from '../assets/bg_settings.jpg'
 import SettingsItem from '../components/settings-list-item'
+import SettingsSwitchItem from '../components/settings-list-switch-item'
 
 import xTheme from '../utils/xTheme'
 
@@ -14,34 +16,99 @@ import RadioGroup, { RadioGroupItem } from '../components/radioGroup'
 import { FeedbackIcon, ShareIcon, SnookerOrg, StarIcon, WebIcon } from '../components/icons'
 
 function SettingsScreen({ route, navigation }: HomeProps) {
-  function SwitchItem(title: string, currValue: boolean) {
-    return <Box style={{ height: 48, flexDirection: 'row', alignItems: 'center' }}>
-      <Box style={{ marginLeft: 10, flex: 1 }}>
-        <Box>
-          <Label style={{ fontSize: 17, }}>{title}</Label>
-        </Box>
-      </Box>
-      <Switch
-        // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        onValueChange={() => null}
-        value={currValue}
-        style={{ marginRight: 15 }}
-      />
-    </Box>
-  }
 
   const [notify, setNotify] = useState<RadioGroupItem>()
+  const [darkMode, setDarkMode] = useState(true)
+  const [hideTbd, setHideTbd] = useState(true)
 
   const notifyItems: RadioGroupItem[] = [
-    { id: 1, name: 'All Results' },
-    { id: 2, name: 'All Results For Main Events' },
-    { id: 3, name: 'Only Finals Results For Main Events' },
-    { id: 4, name: 'None (Never Send Notifications)' },
+    { id: 0, name: 'All Results' },
+    { id: 1, name: 'All Results For Main Events' },
+    { id: 2, name: 'Only Finals Results For Main Events' },
+    { id: 3, name: 'None (Never Send Notifications)' },
   ];
+
+  const storeNotifyData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem('@notify', value)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const storeDarkModeData = async (value: boolean) => {
+    try {
+      {
+        value
+          ? await AsyncStorage.setItem('@darkMode', '1')
+          : await AsyncStorage.setItem('@darkMode', '0')
+      }
+      setDarkMode(value)
+    } catch (e) {
+      // saving error
+    }
+  }
+  const storeTBDData = async (value: boolean) => {
+    try {
+      {
+        value
+          ? await AsyncStorage.setItem('@TBD', '1')
+          : await AsyncStorage.setItem('@TBD', '0')
+      }
+      setHideTbd(value)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const getSettingsData = async () => {
+    try {
+      const vNotify = await AsyncStorage.getItem('@notify')
+      if (vNotify !== null) {
+        setNotify(notifyItems[Number(vNotify)])
+      }
+      const vDarkMode = await AsyncStorage.getItem('@darkMode')
+      if (vDarkMode !== null) {
+        setDarkMode(vDarkMode !== '0')
+      }
+      const vTBD = await AsyncStorage.getItem('@TBD')
+      if (vTBD !== null) {
+        setHideTbd(vTBD !== '0')
+      }
+    } catch (e) {
+      // error reading value
+    }
+  }
 
   const onNotifySelected = (item: RadioGroupItem) => {
     setNotify(item);
+    storeNotifyData(item.id.toString())
   };
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        title: 'App link',
+        message: 'You must try this Snooker App. AppLink: http://onelink.to/snooker',
+        url: 'http://onelink.to/snooker'
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSettingsData()
+  }, [])
 
   return (
     <Box style={{ flex: 1 }}>
@@ -50,9 +117,10 @@ function SettingsScreen({ route, navigation }: HomeProps) {
         <HeaderImage imageUri={bg_settings} />
         <HeaderContainer>
           <HeaderTop title='Settings' />
-          <HeaderBottom rightText='v2.0' />
+          <HeaderBottom rightText='v3.0' />
         </HeaderContainer>
       </Header>
+
       <FlatList style={{ width: '100%' }}
         nestedScrollEnabled
         data={['Notify', 'Other', 'OurApps', 'AboutUs', 'SpecialThanks']}
@@ -71,19 +139,22 @@ function SettingsScreen({ route, navigation }: HomeProps) {
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>OTHER</Label>
                 </Box>
-                <SettingsItem title='Change App Icon'>
-                  <StarIcon width={25} height={25} />
-                </SettingsItem>
-                {SwitchItem('Dark Mode', true)}
-                {SwitchItem('Hide TBD Matches', true)}
+                {Platform.OS === 'ios'
+                  ? <SettingsItem title='Change App Icon'>
+                    <StarIcon width={25} height={25} />
+                  </SettingsItem>
+                  : <></>
+                }
+                <SettingsSwitchItem title='Dark Mode' currValue={darkMode} onValueChange={storeDarkModeData} />
+                <SettingsSwitchItem title='Hide TBD Matches' currValue={hideTbd} onValueChange={storeTBDData} />
               </Box>;
             case 2:
               return <Box>
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>OUR APPS</Label>
                 </Box>
-                <SettingsItem title='FilmBox' detail='Smart Movie Manager' bigSize={true}></SettingsItem>
-                <SettingsItem title='ContactName' detail='Update Your Contacts' bigSize={true}></SettingsItem>
+                <SettingsItem title='FilmBox' detail='Smart Movie Manager' bigSize={true} onPress={() => Linking.openURL('http://onelink.to/filmbox')}></SettingsItem>
+                <SettingsItem title='ContactName' detail='Update Your Contacts' bigSize={true} onPress={() => Linking.openURL('https://apps.apple.com/tr/app/contact-name/id911678698?l=tr')} ></SettingsItem>
               </Box>
             case 3:
               return <Box>
@@ -91,16 +162,16 @@ function SettingsScreen({ route, navigation }: HomeProps) {
                   <Label style={styles.groupHeaderLabel}>ABOUT US</Label>
                 </Box>
                 <SettingsItem title='Rate Us'><StarIcon /></SettingsItem>
-                <SettingsItem title='Share App'><ShareIcon /></SettingsItem>
-                <SettingsItem title='Give Feedback'><FeedbackIcon /></SettingsItem>
-                <SettingsItem title='35coders.com' detail='Tayfun Susamcioglu'><WebIcon /></SettingsItem>
+                <SettingsItem title='Share App' onPress={onShare}><ShareIcon /></SettingsItem>
+                <SettingsItem title='Give Feedback' onPress={() => Linking.openURL('mailto:info@35coders.com?subject=About Snooker App...&body=Hello!')}><FeedbackIcon /></SettingsItem>
+                <SettingsItem title='35coders.com' detail='Tayfun Susamcioglu' onPress={() => Linking.openURL('http://www.35coders.com')}><WebIcon /></SettingsItem>
               </Box>
             case 4:
               return <Box>
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>SPECIAL THANKS</Label>
                 </Box>
-                <SettingsItem title='Hermund Årdalen' detail='Snooker.org'><SnookerOrg /></SettingsItem>
+                <SettingsItem title='Hermund Årdalen' detail='Snooker.org' onPress={() => Linking.openURL('http://www.snooker.org')}><SnookerOrg /></SettingsItem>
               </Box>
 
             default:
