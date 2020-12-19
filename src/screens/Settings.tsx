@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar, StyleSheet, FlatList, Linking, Share, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import InAppReview from "react-native-in-app-review";
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
@@ -106,6 +107,10 @@ function SettingsScreen({ route, navigation }: HomeProps) {
     }
   };
 
+  const onReview = async () => {
+    InAppReview.RequestInAppReview();
+  }
+
   useEffect(() => {
     getSettingsData()
   }, [])
@@ -161,7 +166,7 @@ function SettingsScreen({ route, navigation }: HomeProps) {
                 <Box style={styles.groupHeaderBox}>
                   <Label style={styles.groupHeaderLabel}>ABOUT US</Label>
                 </Box>
-                <SettingsItem title='Rate Us'><StarIcon /></SettingsItem>
+                <SettingsItem title='Rate Us' onPress={onReview}><StarIcon /></SettingsItem>
                 <SettingsItem title='Share App' onPress={onShare}><ShareIcon /></SettingsItem>
                 <SettingsItem title='Give Feedback' onPress={() => Linking.openURL('mailto:info@35coders.com?subject=About Snooker App...&body=Hello!')}><FeedbackIcon /></SettingsItem>
                 <SettingsItem title='35coders.com' detail='Tayfun Susamcioglu' onPress={() => Linking.openURL('http://www.35coders.com')}><WebIcon /></SettingsItem>
@@ -186,12 +191,12 @@ function SettingsScreen({ route, navigation }: HomeProps) {
 
 const styles = StyleSheet.create({
   groupHeaderBox: {
-    height: 40,
+    height: 65,
     backgroundColor: xTheme.colors.listHeaderBG
   },
   groupHeaderLabel: {
     marginLeft: 10,
-    marginTop: 7,
+    marginTop: 35,
     fontSize: 18,
     fontWeight: '500',
   }
