@@ -1,3 +1,13 @@
+export interface ISeasons {
+  status?: string, // "2020"
+  detail?: ISeason[], // "2020-21"
+}
+
+export interface ISeason {
+  year?: string, // "2020"
+  season?: string, // "2020-21"
+}
+
 export interface IEvent {
   recID: string,
   name?: string, // "UK Championship"
