@@ -9,16 +9,16 @@ import PlayerPhoto from './player-photo'
 
 const styles = StyleSheet.create({
   name: {
-    fontSize: 24,
+    fontSize: xTheme.fontSizes.rankName,
     marginTop: 0
   },
   score: {
     color: xTheme.colors.detail,
-    fontSize: 16,
+    fontSize: xTheme.fontSizes.rankScore,
     marginTop: 5
   },
   rank: {
-    fontSize: 48,
+    fontSize: xTheme.fontSizes.rankRank,
     textAlign: 'center',
     color: xTheme.colors.detail,
     marginRight: 10

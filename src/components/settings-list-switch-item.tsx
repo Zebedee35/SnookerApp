@@ -20,7 +20,7 @@ const SettingsSwitchItem: FC<TSettingsSwitchItemProps> = ({ title, currValue, on
     <Box style={{ height: 48, flexDirection: 'row', alignItems: 'center' }}>
       <Box style={{ marginLeft: 10, flex: 1 }}>
         <Box>
-          <Label style={{ fontSize: 17, }}>{title}</Label>
+          <Label style={{ fontSize: xTheme.fontSizes.listItem, }}>{title}</Label>
         </Box>
       </Box>
       <Switch

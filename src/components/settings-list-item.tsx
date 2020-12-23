@@ -26,10 +26,10 @@ const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, 
         </Box>
         <Box style={{ marginLeft: 10, flex: 1 }}>
           {!detail || detail == ''
-            ? <Label style={{ fontSize: 17, height: bigSize ? 64 : 30 }}>{title}</Label>
+            ? <Label style={{ fontSize: xTheme.fontSizes.listItem, height: bigSize ? 64 : 30 }}>{title}</Label>
             : <Box>
-              <Label style={{ fontSize: 17 }}>{title}</Label>
-              <Label style={{ fontSize: 15, color: xTheme.colors.detail }}>{detail}</Label>
+              <Label style={{ fontSize: xTheme.fontSizes.listItem }}>{title}</Label>
+              <Label style={{ fontSize: xTheme.fontSizes.listItemDetail, color: xTheme.colors.detail }}>{detail}</Label>
             </Box>
           }
         </Box>

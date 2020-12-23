@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 30,
     textAlign: 'center',
-    fontSize: 22,
+    fontSize: xTheme.fontSizes.roundHeaderTitle,
     marginTop: 2,
   },
   detail: {
     width: '100%',
     height: 20,
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: xTheme.fontSizes.roundHeaderDetail,
     marginTop: -3,
   }
 })

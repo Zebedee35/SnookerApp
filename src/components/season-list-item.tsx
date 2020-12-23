@@ -9,25 +9,19 @@ import Label from './label'
 
 const styles = StyleSheet.create({
   name: {
-    fontSize: 21,
+    fontSize: xTheme.fontSizes.seasonListName,
     marginTop: 0
   },
   detail: {
     color: xTheme.colors.detail,
-    fontSize: 16,
-    marginTop: 5
+    fontSize: xTheme.fontSizes.seasonListDetail,
+    marginTop: 1
   },
   date: {
     color: xTheme.colors.score,
     textAlign: 'center',
-    fontSize: 18
+    fontSize: xTheme.fontSizes.seasonListDate
   },
-  rank: {
-    fontSize: 48,
-    textAlign: 'center',
-    color: xTheme.colors.detail,
-    marginRight: 10
-  }
 })
 
 type TSeasonListItemProp = {
@@ -59,9 +53,7 @@ const calculateDate = (item: IEvent) => {
     return iStartDay.toString() + ' ' + startMonth + '\n' +
       iEndDay.toString() + ' ' + endMonth
   }
-
 }
-
 
 const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
 
@@ -74,10 +66,6 @@ const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
         <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
           <Label style={styles.name} textType='medium'>{item.name}</Label>
           <Label style={styles.detail}>{item.type}</Label>
-          {/* <Label style={styles.score}>{getLocalScore(item.score!)}</Label> */}
-        </Box>
-        <Box>
-          {/* <Label style={styles.rank}>{item.rank}</Label> */}
         </Box>
       </Box>
     </TouchableOpacity>

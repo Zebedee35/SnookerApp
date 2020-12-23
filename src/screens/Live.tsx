@@ -9,6 +9,7 @@ import { IEvent, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_live from '../assets/bg_live.jpg'
 import Label from '../components/label'
+import xTheme from '../utils/xTheme'
 
 function LiveScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
@@ -60,7 +61,7 @@ function LiveScreen({ route, navigation }: HomeProps) {
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
           <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
             <Image source={require('../assets/closed.png')} />
-            <Label style={{ fontSize: 16 }}>There is no live matches now!</Label>
+            <Label style={{ fontSize: xTheme.fontSizes.listItem }}>There is no live matches now!</Label>
           </Box>
         </ScrollView>
         : <SectionList

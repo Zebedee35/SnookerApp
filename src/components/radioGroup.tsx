@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import xTheme from '../utils/xTheme';
 import Box from './box';
 import Label from './label';
 
@@ -27,7 +28,7 @@ const RadioButton = (props: RadioButtonProps) => {
     <TouchableOpacity
       style={styles.radioButton}
       onPress={() => onSelected(item)}>
-      <Label>{item.name}</Label>
+      <Label style={{ fontSize: xTheme.fontSizes.listItem }}>{item.name}</Label>
       <Box style={styles.button}>
         {selected?.id === item.id && <Box style={styles.selectedButton} />}
       </Box>
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#e5e5e5',
     padding: 12,
   },
   button: {

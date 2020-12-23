@@ -9,6 +9,7 @@ import { IPlayer } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_rank from '../assets/bg_ranking.jpg'
 import Label from '../components/label'
+import xTheme from '../utils/xTheme'
 
 function RankScreen({ route, navigation }: HomeProps) {
   const [players, setPlayers] = useState<IPlayer[]>([])
@@ -60,7 +61,7 @@ function RankScreen({ route, navigation }: HomeProps) {
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
           <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
             {/* picture will come here. */}
-            <Label style={{ fontSize: 16 }}>There is no data!</Label>
+            <Label style={{ fontSize: xTheme.fontSizes.listItem }}>There is no data!</Label>
           </Box>
         </ScrollView>
         : <FlatList

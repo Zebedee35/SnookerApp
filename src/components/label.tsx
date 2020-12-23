@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFFFFF',
     fontFamily: "Geogrotesque-Regular",
-    fontSize: 26,
+    fontSize: xTheme.fontSizes.headerTitle,
     textAlign: 'center',
     textShadowColor: '#000000',
     textShadowRadius: 2,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     fontFamily: "Geogrotesque-Medium",
     marginLeft: 10,
     marginTop: 35,
-    fontSize: 18,
+    fontSize: xTheme.fontSizes.groupHeader,
   }
 
 })

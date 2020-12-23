@@ -6,6 +6,34 @@ const xTheme = {
     live: '#96120D',
     detail: '#9c9c9c',
     yellow: '#234242'
+  },
+  fontSizes: {
+    listItem: 17,
+    listItemDetail: 15,
+    headerLabel: 17,
+    headerTitle: 26,
+
+    groupHeader: 18,
+
+    rankName: 24,
+    rankScore: 17,
+    rankRank: 48,
+
+    scoreBig: 38,
+    scoreSmall: 18,
+
+    roundHeaderTitle: 22,
+    roundHeaderDetail: 13,
+
+    scoreListPlayerName: 13,
+    scoreListStatusBig: 17,
+    scoreListStatusSmall: 11,
+    scoreListPlayerRank: 10,
+
+    seasonListName: 22,
+    seasonListDetail: 17,
+    seasonListDate: 18,
+
   }
 }
 
