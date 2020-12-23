@@ -85,7 +85,7 @@ function SeasonScreen({ route, navigation }: HomeProps) {
 
       <FlatList
         data={events}
-        keyExtractor={(item) => item.recID}
+        keyExtractor={(item) => { return item.name + item.recID }}
         renderItem={({ item }) => <SeasonListItem item={item} />}
         refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}
       />

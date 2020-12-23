@@ -1,28 +1,42 @@
 import React, { FC } from 'react'
 import { StyleSheet, TextStyle, Text } from 'react-native'
+import xTheme from '../utils/xTheme'
+import Box from './box'
 
 const styles = StyleSheet.create({
   regular: {
-
+    fontFamily: "Geogrotesque-Regular"
   },
   bold: {
-
+    fontFamily: "Geogrotesque-SemiBold"
   },
-  light:
-  {
-
+  light: {
+    fontFamily: "Geogrotesque-Light"
   },
   medium: {
-
+    fontFamily: "Geogrotesque-Medium"
   },
   header: {
     color: '#FFFFFF',
+    fontFamily: "Geogrotesque-Regular",
     fontSize: 26,
     textAlign: 'center',
     textShadowColor: '#000000',
     textShadowRadius: 2,
     textShadowOffset: { width: 1, height: 1 },
+  },
+
+  groupHeaderBox: {
+    height: 65,
+    backgroundColor: xTheme.colors.listHeaderBG
+  },
+  groupHeaderLabel: {
+    fontFamily: "Geogrotesque-Medium",
+    marginLeft: 10,
+    marginTop: 35,
+    fontSize: 18,
   }
+
 })
 
 type TLabelProps = {
@@ -45,6 +59,9 @@ const Label: FC<TLabelProps> = ({ children, style, textType, ...props }) => {
     case 'medium':
       textStyle = styles.medium
       break
+    default:
+      textStyle = styles.regular
+      break
   }
   const passedStyles = Array.isArray(style) ? Object.assign({}, ...style) : style
 
@@ -66,10 +83,16 @@ const LabelHeader: FC<TLabelProps> = ({ children, style, textType, ...props }) =
       {children}
     </Text>
   )
-
 }
 
+const SettingHeader: FC<TLabelProps> = ({ children }) => {
+  return (
+    <Box style={styles.groupHeaderBox}>
+      <Label style={styles.groupHeaderLabel}>{children}</Label>
+    </Box>
+  )
+}
 
 export default Label;
 
-export { LabelHeader }
+export { LabelHeader, SettingHeader }

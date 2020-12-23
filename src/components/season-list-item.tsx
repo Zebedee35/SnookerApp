@@ -10,7 +10,6 @@ import Label from './label'
 const styles = StyleSheet.create({
   name: {
     fontSize: 21,
-    fontWeight: '500',
     marginTop: 0
   },
   detail: {
@@ -70,10 +69,10 @@ const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
     <TouchableOpacity>
       <Box style={{ flex: 1, flexDirection: 'row' }}>
         <Box style={{ width: 70, height: 65, justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-          <Label style={styles.date}> {calculateDate(item)}</Label>
+          <Label style={styles.date} textType='medium'> {calculateDate(item)}</Label>
         </Box>
         <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
-          <Label style={styles.name}>{item.name}</Label>
+          <Label style={styles.name} textType='medium'>{item.name}</Label>
           <Label style={styles.detail}>{item.type}</Label>
           {/* <Label style={styles.score}>{getLocalScore(item.score!)}</Label> */}
         </Box>

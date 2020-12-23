@@ -65,7 +65,7 @@ function RankScreen({ route, navigation }: HomeProps) {
         </ScrollView>
         : <FlatList
           data={players}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id!}
           renderItem={({ item }) => <RankListItem item={item} />}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
 

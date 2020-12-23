@@ -6,7 +6,7 @@ import InAppReview from "react-native-in-app-review";
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import { HomeProps } from '../types/navTypes'
-import Label from '../components/label'
+import Label, { SettingHeader } from '../components/label'
 import bg_settings from '../assets/bg_settings.jpg'
 import SettingsItem from '../components/settings-list-item'
 import SettingsSwitchItem from '../components/settings-list-switch-item'
@@ -134,16 +134,12 @@ function SettingsScreen({ route, navigation }: HomeProps) {
           switch (index) {
             case 0:
               return <Box>
-                <Box style={styles.groupHeaderBox}>
-                  <Label style={styles.groupHeaderLabel}>NOTIFICATIONS</Label>
-                </Box>
+                <SettingHeader>NOTIFICATIONS</SettingHeader>
                 <RadioGroup items={notifyItems} onSelected={onNotifySelected} selected={notify} />
               </Box>
             case 1:
               return <Box>
-                <Box style={styles.groupHeaderBox}>
-                  <Label style={styles.groupHeaderLabel}>OTHER</Label>
-                </Box>
+                <SettingHeader>OTHER</SettingHeader>
                 {Platform.OS === 'ios'
                   ? <SettingsItem title='Change App Icon'>
                     <StarIcon width={25} height={25} />
@@ -155,17 +151,13 @@ function SettingsScreen({ route, navigation }: HomeProps) {
               </Box>;
             case 2:
               return <Box>
-                <Box style={styles.groupHeaderBox}>
-                  <Label style={styles.groupHeaderLabel}>OUR APPS</Label>
-                </Box>
+                <SettingHeader>OUR APPS</SettingHeader>
                 <SettingsItem title='FilmBox' detail='Smart Movie Manager' bigSize={true} onPress={() => Linking.openURL('http://onelink.to/filmbox')}></SettingsItem>
                 <SettingsItem title='ContactName' detail='Update Your Contacts' bigSize={true} onPress={() => Linking.openURL('https://apps.apple.com/tr/app/contact-name/id911678698?l=tr')} ></SettingsItem>
               </Box>
             case 3:
               return <Box>
-                <Box style={styles.groupHeaderBox}>
-                  <Label style={styles.groupHeaderLabel}>ABOUT US</Label>
-                </Box>
+                <SettingHeader>ABOUT US</SettingHeader>
                 <SettingsItem title='Rate Us' onPress={onReview}><StarIcon /></SettingsItem>
                 <SettingsItem title='Share App' onPress={onShare}><ShareIcon /></SettingsItem>
                 <SettingsItem title='Give Feedback' onPress={() => Linking.openURL('mailto:info@35coders.com?subject=About Snooker App...&body=Hello!')}><FeedbackIcon /></SettingsItem>
@@ -173,9 +165,7 @@ function SettingsScreen({ route, navigation }: HomeProps) {
               </Box>
             case 4:
               return <Box>
-                <Box style={styles.groupHeaderBox}>
-                  <Label style={styles.groupHeaderLabel}>SPECIAL THANKS</Label>
-                </Box>
+                <SettingHeader>SPECIAL THANKS</SettingHeader>
                 <SettingsItem title='Hermund Årdalen' detail='Snooker.org' onPress={() => Linking.openURL('http://www.snooker.org')}><SnookerOrg /></SettingsItem>
               </Box>
 
@@ -188,18 +178,5 @@ function SettingsScreen({ route, navigation }: HomeProps) {
   )
 
 }
-
-const styles = StyleSheet.create({
-  groupHeaderBox: {
-    height: 65,
-    backgroundColor: xTheme.colors.listHeaderBG
-  },
-  groupHeaderLabel: {
-    marginLeft: 10,
-    marginTop: 35,
-    fontSize: 18,
-    fontWeight: '500',
-  }
-})
 
 export default SettingsScreen

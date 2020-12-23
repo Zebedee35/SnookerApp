@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { StyleSheet } from 'react-native'
 
 import { IPlayer } from '../types/apiTypes'
-import Utils from '../utils/Utils'
 import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
@@ -11,7 +10,6 @@ import PlayerPhoto from './player-photo'
 const styles = StyleSheet.create({
   name: {
     fontSize: 24,
-    fontWeight: '700',
     marginTop: 0
   },
   score: {
@@ -42,7 +40,7 @@ const RankListItem: FC<TRankListItemProp> = ({ item }) => {
     <Box style={{ flex: 1, flexDirection: 'row' }}>
       <PlayerPhoto style={{ width: 80, height: 80 }} imgUri={item.photoURL} />
       <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
-        <Label style={styles.name}>{item.name}</Label>
+        <Label style={styles.name} textType='bold'>{item.name}</Label>
         <Label style={styles.score}>{getLocalScore(item.score!)}</Label>
       </Box>
       <Box>
