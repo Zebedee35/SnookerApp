@@ -87,7 +87,7 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
         </Box>
 
         {/* Skor Panel */}
-        <Box style={{ width: bigSize ? 120 : 85, height: '100%' }}>
+        <Box style={{ width: bigSize ? 130 : 85, height: '100%' }}>
           <Box style={{ width: '100%', marginTop: 5, flexDirection: 'row' }}>
             <Label textType='bold' style={{ fontSize: scoreSize(), textAlign: 'right', color: xTheme.colors.score, flex: 1, }}>{item.players![0].score}</Label>
             <Label textType='bold' style={{ fontSize: scoreSize(), textAlign: 'center', color: xTheme.colors.score, flex: 1, }}>-</Label>
