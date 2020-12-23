@@ -1,7 +1,6 @@
 // import 'react-native-gesture-handler';
 
 import React from 'react';
-import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -21,31 +20,31 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator initialRouteName="Home" tabBarOptions={{ activeTintColor: xTheme.colors.tabBar }}>
         <Tab.Screen name='Seasons' component={SeasonScreen} options={{
-          tabBarIcon: ({ color, size }) => (
-            <SeasonIcon color={xTheme.colors.score} />
+          tabBarIcon: ({ color }) => (
+            <SeasonIcon color={color} />
           )
         }} />
         <Tab.Screen name='Live' component={LiveScreen} options={{
-          tabBarIcon: ({ color, size }) => (
-            <LiveIcon color={xTheme.colors.score} />
+          tabBarIcon: ({ color }) => (
+            <LiveIcon color={color} />
           )
         }} />
         <Tab.Screen name='Home' component={HomeScreen}
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <HomeIcon color={xTheme.colors.score} />
+            tabBarIcon: ({ color }) => (
+              <HomeIcon color={color} />
             )
           }} />
         <Tab.Screen name='Rankings' component={RankScreen} options={{
-          tabBarIcon: ({ color, size }) => (
-            <RankingIcon color={xTheme.colors.score} />
+          tabBarIcon: ({ color }) => (
+            <RankingIcon color={color} />
           )
         }} />
         <Tab.Screen name='Settings' component={SettingsScreen} options={{
-          tabBarIcon: ({ color, size }) => (
-            <SettingsIcon color={xTheme.colors.score} />
+          tabBarIcon: ({ color }) => (
+            <SettingsIcon color={color} />
           )
         }} />
       </Tab.Navigator>

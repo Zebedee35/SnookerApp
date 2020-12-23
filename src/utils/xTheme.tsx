@@ -5,7 +5,9 @@ const xTheme = {
     score: '#64AC1E',
     live: '#96120D',
     detail: '#9c9c9c',
-    yellow: '#234242'
+    yellow: '#234242',
+    tabBar: '#64AC1E',
+
   },
   fontSizes: {
     listItem: 17,
