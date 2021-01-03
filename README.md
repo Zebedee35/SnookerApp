@@ -35,11 +35,54 @@ fullURL: http://35coders.com/index.php/testapi/tournament
 This request returns the currently active tournament information. The event key contains general information about the tournament. The rounds key lists all matches of the tournament linked to rounds. _TestAPI only brings the UK Championship tournament information._
 
 
+
 - FUNCTION: `ranks`
 
 fullURL: http://35coders.com/index.php/testapi/ranks 
 
 This request lists the players' scores and positions in the tournament. _TestAPI fetches real ranking information._
+
+
+
+- FUNCTION: `live_score`
+
+fullURL: http://35coders.com/index.php/testapi/live_score 
+
+This request returns Ongoing matches. _TestAPI only returns the same 3 matches._
+
+
+
+- FUNCTION: `seasons`
+
+fullURL: http://35coders.com/index.php/testapi/seasons 
+
+Gives the season list in descending order. 
+
+
+
+- FUNCTION: `seasonEvents`
+
+fullURL: http://35coders.com/index.php/testapi/seasonEvents/year/xxxx 
+
+Returns a list of events in a season. It takes the `year` parameter. Its default value is this year.
+
+
+
+- FUNCTION: `pvp`
+
+fullURL: http://35coders.com/index.php/testapi/pvp/p1/12/p2/154
+
+Lists the results of matches between two players. It takes two parameters as `p1` and `p2`. _TestAPI only returns the results of Judd Trump and Neil Robertson._
+
+
+
+- FUNCTION: `playerMatches`
+
+fullURL: http://35coders.com/index.php/testapi/playerMatches/playerId/12/
+
+Returns the last 15 matches of the selected player. It takes the `playerId` parameter. _TestAPI only returns the results of Judd Trump._
+
+
 
 ## Installation
 
