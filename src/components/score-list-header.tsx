@@ -1,11 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 
-import { IEvent } from '../types/apiTypes'
-
 import Box from './box'
 import Label from './label'
-
+import Utils from '../utils/Utils'
 import xTheme from '../utils/xTheme'
 
 
@@ -27,12 +25,11 @@ const ScoreListHeader: FC<TScoreListHeaderProp> = ({ name, round, distance, numL
       <Label style={styles.name} textType='bold'>{name}</Label>
       <Label style={styles.detail}>
         (
-          {round == '15' ? (+distance > 0 ? `Best of ${+distance * 2 - 1}; ` : 'D') + `Winner: ${currency} ${winnerMoney}; Runner-up: ${currency} ${loosersMoney}`
+          {round == '15' ? (+distance > 0 ? `Best of ${+distance * 2 - 1}; ` : 'D') + `Winner: ${Utils.instance.getCurrencySymbol(currency)} ${winnerMoney}; Runner-up: ${Utils.instance.getCurrencySymbol(currency)} ${loosersMoney}`
           : (+numLeft > 9 ? `Last ${+numLeft}; ` : '') +
           (+distance > 0 ? `Best of ${+distance * 2 - 1}` : ``) +
-          (loosersMoney !== '' ? `; Losers receive ${currency} ${loosersMoney}` : `A`)
-        }
-  )
+          (loosersMoney !== '' ? `; Losers receive ${Utils.instance.getCurrencySymbol(currency)} ${loosersMoney}` : `A`)}
+        )
       </Label>
 
     </Box>

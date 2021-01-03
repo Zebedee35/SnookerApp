@@ -25,7 +25,7 @@ function RankScreen({ route, navigation }: HomeProps) {
     try {
       setLoading(true)
       setUpdateDate('loading...')
-      const response = await snkrApi.get('/ranks', {
+      const response = await snkrApi.get('ranks', {
         params: {
 
         }
@@ -66,10 +66,9 @@ function RankScreen({ route, navigation }: HomeProps) {
         </ScrollView>
         : <FlatList
           data={players}
-          keyExtractor={(item) => item.id!}
+          keyExtractor={(item) => item.name! + item.id!}
           renderItem={({ item }) => <RankListItem item={item} />}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
-
       }
 
     </Box >

@@ -1,3 +1,4 @@
+import { storiesOf } from '@storybook/react-native';
 import Moment from 'moment';
 import { IMatch } from '../types/apiTypes';
 
@@ -11,16 +12,16 @@ export default class Utils {
 
     if (item.unfinised === "1") {
       const scheduledDate = Moment(item.scheduledDate, "YYYY-MM-DD HH:mm:ss")
+      const formatDate = Moment(item.scheduledDate, "YYYY-MM-DD HH:mm:ss").format('MMM Do / HH:mm')
       if (scheduledDate.isBefore(Moment())) {
         return ('live')
       }
       else {
-        if (parseInt(item.players[0].score) > 0 || parseInt(item.players[1].score) > 0) {
+        if (parseInt(item.players![0].score!) > 0 || parseInt(item.players![1].score!) > 0) {
           return ('live')
         }
         else {
-          // return(moment(Date(scheduledDate)).format('DD-MM-YYYY'))
-          return 'Tayfun'
+          return formatDate
         }
       }
     }
@@ -34,6 +35,23 @@ export default class Utils {
       }
     }
 
+  }
+
+  getCurrencySymbol = (currency: String) => {
+    switch (currency) {
+      case 'GBP':
+        return '£'
+        break;
+      case 'EUR':
+        return '€'
+        break;
+      case 'USD':
+        return '$'
+        break;
+      default:
+        return currency
+        break;
+    }
   }
 }
 
