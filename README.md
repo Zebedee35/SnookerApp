@@ -28,12 +28,17 @@ Please note that: The Test API brings limited content. Because this API is for d
 
 *baseURL:* http://35coders.com/index.php/testapi
 
-- FUNCTION: *tournament*
+- FUNCTION: `tournament`
+
 fullURL: http://35coders.com/index.php/testapi/tournament 
+
 This request returns the currently active tournament information. The event key contains general information about the tournament. The rounds key lists all matches of the tournament linked to rounds. _TestAPI only brings the UK Championship tournament information._
 
-- FUNCTION: *ranks*
+
+- FUNCTION: `ranks`
+
 fullURL: http://35coders.com/index.php/testapi/ranks 
+
 This request lists the players' scores and positions in the tournament. _TestAPI fetches real ranking information._
 
 ## Installation
