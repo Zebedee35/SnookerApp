@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { StyleSheet, ViewStyle, View, ImageBackground, ImageSourcePropType } from 'react-native'
 import xTheme from '../utils/xTheme'
 import Box from './box'
-import { LabelHeader } from './label'
+import Label, { LabelHeader } from './label'
 
 const HEADER_HEIGHT = 180
 
@@ -93,7 +93,10 @@ const HeaderBottom: FC<THeaderBottomProps> = ({ children, leftText, middleText, 
   return (
     <Box style={{ flexDirection: 'row', marginBottom: 5 }} {...props}>
       <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, marginLeft: 10 }}>{leftText}</LabelHeader>
-      <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, flex: 1 }}>{middleText}</LabelHeader>
+      {!middleText || middleText === ''
+        ? <Box style={{ flex: 1 }}>{children}</Box>
+        : <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, flex: 1 }}>{middleText}</LabelHeader>
+      }
       <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, marginRight: 10 }}>{rightText}</LabelHeader>
     </Box>
   )
