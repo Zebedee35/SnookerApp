@@ -9,18 +9,20 @@ The main screens are as follows.
 
 ### ToDo List
 - [x] Home Screen
-- [x] Live Score Screen
+- [x] Home Screen: List Tournament Matches
+- [ ] Home Screen: Player vs Player Modal Page
+- [ ] Home Screen: Player Detail Modal Page
+- [x] Live Score Screen: Live Version
+- [x] Live Score Screen: Offline Version
 - [x] Rankings Screen
 - [x] Seasons Screen 
+- [x] Seasons Screen: Selection of previous seasons  
+- [ ] Seasons Screen: Tournament selection from the session list
 - [x] Settings Screen
 - [ ] Adding country flags 
 - [ ] Animation for 'Live' text
 - [ ] Dark Theme
 - [ ] Hide TBD Matches
-- [ ] Player Detail Modal Page
-- [ ] Player vs Player Modal Page
-- [ ] Tournament selection from the session list
-- [ ] Selection of previous seasons
 - [ ] Notification Settings
 
 ### API Documentation
