@@ -17,9 +17,15 @@ const styles = StyleSheet.create({
     fontSize: xTheme.fontSizes.seasonListDetail,
     marginTop: 1
   },
-  date: {
+  datePass: {
+    color: xTheme.colors.detail,
+    textAlign: 'center',
+    fontSize: xTheme.fontSizes.seasonListDate
+  },
+  dateFuture: {
     color: xTheme.colors.score,
     textAlign: 'center',
+    fontWeight: '600',
     fontSize: xTheme.fontSizes.seasonListDate
   },
 })
@@ -55,13 +61,18 @@ const calculateDate = (item: IEvent) => {
   }
 }
 
+const isPastEvent = (item: IEvent) => {
+  return Moment(item.endDate, "YYYY-MM-DD HH:mm:ss").isBefore(Moment())
+}
+
 const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
 
   return (
     <TouchableOpacity>
       <Box style={{ flex: 1, flexDirection: 'row' }}>
-        <Box style={{ width: 70, height: 65, justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-          <Label style={styles.date} textType='medium'> {calculateDate(item)}</Label>
+        <Box style={{ width: 70, height: 65, justifyContent: 'center' }}>
+
+          <Label style={isPastEvent(item) ? styles.datePass : styles.dateFuture} textType='medium'>{calculateDate(item)}</Label>
         </Box>
         <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
           <Label style={styles.name} textType='medium'>{item.name}</Label>

@@ -1,6 +1,7 @@
 const xTheme = {
   borderRadius: 8,
   colors: {
+    text: '#000000',
     listHeaderBG: '#DFE2E7',
     score: '#64AC1E',
     live: '#96120D',
