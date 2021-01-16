@@ -1,45 +1,21 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, Pressable } from 'react-native'
 
-import { IMatch } from '../types/apiTypes'
+import { IMatch, IPlayer } from '../types/apiTypes'
 import Utils from '../utils/Utils'
 import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
 import PlayerPhoto from './player-photo'
 
-const styles = StyleSheet.create({
-  msDone: {
-    fontSize: xTheme.fontSizes.scoreListStatusSmall,
-    textAlign: 'center',
-    marginTop: 0
-  },
-  msLive: {
-    color: xTheme.colors.live,
-    fontSize: xTheme.fontSizes.scoreListStatusSmall,
-    textAlign: 'center',
-    marginTop: 0
-  },
-  msDoneBig: {
-    fontSize: xTheme.fontSizes.scoreListStatusBig,
-    textAlign: 'center',
-    marginTop: 0
-  },
-  msLiveBig: {
-    color: xTheme.colors.live,
-    fontSize: xTheme.fontSizes.scoreListStatusBig,
-    textAlign: 'center',
-    marginTop: 0
-  }
-})
-
 type TScoreListItemProp = {
   // item: IRound
   item: IMatch
   bigSize?: boolean
+  onPlayerSelected: (item: IPlayer) => void
 }
 
-const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
+const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false, onPlayerSelected }) => {
 
   const [matchState, setMatchState] = useState('')
 
@@ -70,7 +46,9 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
     <Box style={{ height: bigSize ? 100 : 50 }}>
       <Box style={{ flexDirection: 'row', height: bigSize ? 80 : 50 }}>
         {/* player 1 */}
-        <Box style={{ flex: 1, flexDirection: 'row' }}>
+        <Pressable style={{ flex: 1, flexDirection: 'row' }} onPress={() => {
+          onPlayerSelected(item.players![0])
+        }}>
           <Box style={{ width: bigSize ? 80 : 44, margin: 3 }}>
             <PlayerPhoto style={{ width: bigSize ? 80 : 44, height: bigSize ? 80 : 44 }} imgUri={item.players![0].photoURL} />
             <Box style={{ width: bigSize ? 155 : 44, height: bigSize ? 125 : 82, zIndex: 1, position: 'absolute', alignItems: 'center', justifyContent: 'center' }} >
@@ -84,10 +62,13 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
             ? <Box style={{ flex: 1, margin: 3, justifyContent: 'center', alignItems: 'center' }}>
               <Label style={{ width: '100%', fontSize: xTheme.fontSizes.scoreListPlayerName, textAlign: 'left' }}>{item.players![0].name}</Label>
             </Box> : <></>}
-        </Box>
+        </Pressable>
 
         {/* Skor Panel */}
-        <Box style={{ width: bigSize ? 130 : 85, height: '100%' }}>
+        <Pressable style={{ width: bigSize ? 130 : 85, height: '100%' }} onPress={() => {
+          console.log('SCORE: ' + item.players![0].score + ' - ' + item.players![1].score)
+        }}>
+
           <Box style={{ width: '100%', marginTop: 5, flexDirection: 'row' }}>
             <Label textType='bold' style={{ fontSize: scoreSize(), textAlign: 'right', color: xTheme.colors.score, flex: 1, }}>{item.players![0].score}</Label>
             <Label textType='bold' style={{ fontSize: scoreSize(), textAlign: 'center', color: xTheme.colors.score, flex: 1, }}>-</Label>
@@ -96,11 +77,14 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
           <Box style={{ width: '100%' }}>
             {checkMatchState(matchState)}
           </Box>
-        </Box>
+        </Pressable>
 
 
         {/* player 2 */}
-        <Box style={{ flex: 1, flexDirection: bigSize ? 'row-reverse' : 'row' }}>
+        <Pressable style={{ flex: 1, flexDirection: bigSize ? 'row-reverse' : 'row' }} onPress={() => {
+          onPlayerSelected(item.players![1])
+        }}>
+          {/* <Box style={{ flex: 1, flexDirection: bigSize ? 'row-reverse' : 'row' }}> */}
           {!bigSize
             ? <Box style={{ flex: 1, margin: 3, justifyContent: 'center', alignItems: 'center' }}>
               <Label style={{ width: '100%', fontSize: xTheme.fontSizes.scoreListPlayerName, textAlign: 'right' }}>{item.players![1].name}</Label>
@@ -113,7 +97,7 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
               <Label style={{ backgroundColor: '#000000', color: '#FFFFFF', fontSize: xTheme.fontSizes.scoreListPlayerRank, width: 28, textAlign: 'center' }}># {item.players![1].rank}</Label>
             </Box>
           </Box>
-        </Box>
+        </Pressable>
       </Box>
       {bigSize
         ? <Box style={{ height: 20, flexDirection: 'row' }}>
@@ -130,3 +114,29 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false }) => {
 }
 
 export default ScoreListItem
+
+
+const styles = StyleSheet.create({
+  msDone: {
+    fontSize: xTheme.fontSizes.scoreListStatusSmall,
+    textAlign: 'center',
+    marginTop: 0
+  },
+  msLive: {
+    color: xTheme.colors.live,
+    fontSize: xTheme.fontSizes.scoreListStatusSmall,
+    textAlign: 'center',
+    marginTop: 0
+  },
+  msDoneBig: {
+    fontSize: xTheme.fontSizes.scoreListStatusBig,
+    textAlign: 'center',
+    marginTop: 0
+  },
+  msLiveBig: {
+    color: xTheme.colors.live,
+    fontSize: xTheme.fontSizes.scoreListStatusBig,
+    textAlign: 'center',
+    marginTop: 0
+  }
+})
