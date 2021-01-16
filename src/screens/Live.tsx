@@ -3,19 +3,24 @@ import { RefreshControl, ScrollView, SectionList, StatusBar, Image } from 'react
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
+import Label from '../components/label'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
-import { IEvent, IRound } from '../types/apiTypes'
+import PlayerDetailModalView from '../components/player-detail-modal-view'
+
+import { IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_live from '../assets/bg_live.jpg'
-import Label from '../components/label'
 import xTheme from '../utils/xTheme'
 
 function LiveScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
   const [updateDate, setUpdateDate] = useState('')
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [playerModalVisible, setPlayerModalVisible] = useState(false)
+
 
   const onRefresh = React.useCallback(() => {
     getLiveScores()
@@ -38,6 +43,12 @@ function LiveScreen({ route, navigation }: HomeProps) {
       console.log(err)
       setErrorMessage('Something whent wrong3')
     }
+  }
+
+  const showPlayerDetail = (player: IPlayer) => {
+    setSelectedPlayer(player)
+    if (player.id !== '376')
+      setPlayerModalVisible(true)
   }
 
   useEffect(() => {
@@ -67,11 +78,11 @@ function LiveScreen({ route, navigation }: HomeProps) {
         : <SectionList
           sections={rounds}
           keyExtractor={(item) => item.recId}
-          renderItem={({ item }) => <ScoreListItem item={item} bigSize={true} />}
+          renderItem={({ item }) => <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} />}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
 
       }
-
+      <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
     </Box >
   )
 }

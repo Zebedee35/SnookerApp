@@ -6,15 +6,19 @@ import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
 import ScoreListHeader from '../components/score-list-header'
-import { IEvent, IRound } from '../types/apiTypes'
+import PlayerDetailModalView from '../components/player-detail-modal-view'
+
+import { IEvent, IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_home from '../assets/bg_home.jpg'
 
 function HomeScreen({ route, navigation }: HomeProps) {
   const [event, setEvent] = useState<IEvent>()
   const [rounds, setRounds] = useState<IRound[]>([])
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [playerModalVisible, setPlayerModalVisible] = useState(false)
 
   const onRefresh = React.useCallback(() => {
     getCurrentTour()
@@ -32,16 +36,20 @@ function HomeScreen({ route, navigation }: HomeProps) {
       console.log(err)
       setErrorMessage('Something went wrong in the getCurrentTour')
     }
-
   }
 
-  useEffect(() => {
-    getCurrentTour()
-  }, [])
+  const showPlayerDetail = (player: IPlayer) => {
+    setSelectedPlayer(player)
+    if (player.id !== '376')
+      setPlayerModalVisible(true)
+  }
 
   useEffect(() => {
   }, [event])
 
+  useEffect(() => {
+    getCurrentTour()
+  }, [])
 
   return (
     <Box style={{ flex: 1 }}>
@@ -60,14 +68,12 @@ function HomeScreen({ route, navigation }: HomeProps) {
 
       <SectionList
         sections={rounds}
-
         keyExtractor={(item) => item.recId}
-
         renderItem={({ item }) => {
           if (item.round === "15" || item.round === "14") {
-            return <ScoreListItem item={item} bigSize={true} />
+            return <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} />
           }
-          return <ScoreListItem item={item} />
+          return <ScoreListItem item={item} onPlayerSelected={showPlayerDetail} />
         }
         }
         renderSectionHeader={({ section: { name, round, distance, numLeft, loosersMoney, winnerMoney, currency } }) => (
@@ -84,6 +90,7 @@ function HomeScreen({ route, navigation }: HomeProps) {
         refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}
 
       />
+      <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
     </Box >
   )
 }

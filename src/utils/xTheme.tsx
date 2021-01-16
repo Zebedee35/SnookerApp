@@ -2,13 +2,15 @@ const xTheme = {
   borderRadius: 8,
   colors: {
     text: '#000000',
+    negative: '#FFFFFF',
     listHeaderBG: '#DFE2E7',
     score: '#64AC1E',
     live: '#96120D',
     detail: '#9c9c9c',
-    yellow: '#234242',
+    yellow: '#F323f5',
     tabBar: '#64AC1E',
-
+    modalWindow: '#FFFFFF',
+    modalTransparentBackground: 'rgba(0, 0, 0, 0.7)'
   },
   fontSizes: {
     listItem: 17,
@@ -32,6 +34,8 @@ const xTheme = {
     scoreListStatusBig: 17,
     scoreListStatusSmall: 11,
     scoreListPlayerRank: 10,
+
+    playerMatchesScore: 15,
 
     seasonListName: 22,
     seasonListDetail: 17,

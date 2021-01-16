@@ -87,3 +87,29 @@ export interface IPlayer {
   pro?: string, // "2005"
   photoURL?: string, // "http://35coders.com/common/snooker/img/judd-trump.jpg"
 }
+
+export interface IPlayerLastestMatches {
+  status?: string,
+  games: ILastestEvents[],
+}
+
+export interface ILastestEvents {
+  eventID: string, // "1043"
+  eventName: string, // "World Grand Prix"
+  scheduledYear?: string, // "2020"
+  scheduledDate?: string, // "2020-12-20 19:00:00"
+  data: ILastestMatches[],
+}
+
+export interface ILastestMatches {
+  round: string, // "15"
+  roundText: string, // "Final"
+  roundShort: string, // "F"
+  ownerScore: string, // "10"
+  playerScore: string, // "7"
+  playerId: string, // "85"
+  playerName: string, // "Jack Lisowski"
+  playerRank: string, // "14"
+  playerCountryCode?: string, // "XE"
+  playerPhotoURL?: string, // "http://35Coders.com/common/snooker/img/jack-lisowski.jpg"
+}
