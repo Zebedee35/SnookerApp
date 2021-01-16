@@ -7,29 +7,6 @@ import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
 
-const styles = StyleSheet.create({
-  name: {
-    fontSize: xTheme.fontSizes.seasonListName,
-    marginTop: 0
-  },
-  detail: {
-    color: xTheme.colors.detail,
-    fontSize: xTheme.fontSizes.seasonListDetail,
-    marginTop: 1
-  },
-  datePass: {
-    color: xTheme.colors.detail,
-    textAlign: 'center',
-    fontSize: xTheme.fontSizes.seasonListDate
-  },
-  dateFuture: {
-    color: xTheme.colors.score,
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: xTheme.fontSizes.seasonListDate
-  },
-})
-
 type TSeasonListItemProp = {
   item: IEvent
 }
@@ -71,7 +48,6 @@ const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
     <TouchableOpacity>
       <Box style={{ flex: 1, flexDirection: 'row' }}>
         <Box style={{ width: 70, height: 65, justifyContent: 'center' }}>
-
           <Label style={isPastEvent(item) ? styles.datePass : styles.dateFuture} textType='medium'>{calculateDate(item)}</Label>
         </Box>
         <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
@@ -84,3 +60,26 @@ const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
 }
 
 export default SeasonListItem
+
+const styles = StyleSheet.create({
+  name: {
+    fontSize: xTheme.fontSizes.seasonListName,
+    marginTop: 0
+  },
+  detail: {
+    color: xTheme.colors.detail,
+    fontSize: xTheme.fontSizes.seasonListDetail,
+    marginTop: 1
+  },
+  datePass: {
+    color: xTheme.colors.detail,
+    textAlign: 'center',
+    fontSize: xTheme.fontSizes.seasonListDate
+  },
+  dateFuture: {
+    color: xTheme.colors.score,
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: xTheme.fontSizes.seasonListDate
+  },
+})

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native'
+import { StyleSheet, TouchableOpacity, Modal, FlatList, Pressable } from 'react-native'
 
 import { ISeason } from '../types/apiTypes'
 import xTheme from '../utils/xTheme'
@@ -21,7 +21,7 @@ const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, data
     }}
   >
     <Box style={styles.centeredView}>
-      <TouchableOpacity style={styles.tapFrame} activeOpacity={1} onPress={() => {
+      <Pressable style={styles.tapFrame} activeOpacity={1} onPress={() => {
         setModalVisible(!modalVisible)
       }}>
 
@@ -35,15 +35,15 @@ const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, data
             </TouchableOpacity>}
             style={{ width: 100 }} />
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: xTheme.colors.tabBar }}
+            style={{ ...styles.closeButton }}
             onPress={() => {
               setModalVisible(!modalVisible)
             }}
           >
-            <Label style={styles.textStyle}> Cancel </Label>
+            <Label style={styles.buttonText}> Cancel </Label>
           </TouchableOpacity>
         </Box>
-      </TouchableOpacity>
+      </Pressable>
 
     </Box>
   </Modal>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    backgroundColor: xTheme.colors.modalTransparentBackground
   },
   tapFrame: {
     flex: 1,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     margin: 2,
     width: 200,
     height: 350,
-    backgroundColor: "white",
+    backgroundColor: xTheme.colors.modalWindow,
     borderRadius: xTheme.borderRadius,
     padding: 15,
     alignItems: "center",
@@ -81,14 +81,14 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
-  openButton: {
-    backgroundColor: "#F194FF",
+  closeButton: {
+    backgroundColor: xTheme.colors.tabBar,
     borderRadius: xTheme.borderRadius,
     marginTop: 20,
     padding: 10
   },
-  textStyle: {
-    color: "white",
+  buttonText: {
+    color: xTheme.colors.negative,
     textAlign: "center",
     fontSize: 16
   },
