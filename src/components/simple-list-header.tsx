@@ -7,24 +7,42 @@ import xTheme from '../utils/xTheme'
 
 
 type TSimpleListHeaderProp = {
-  text: string
+  text: string,
+  leftText?: string
+  rightText?: string
 }
 
-const SimpleListHeader: FC<TSimpleListHeaderProp> = ({ text }) => {
+const SimpleListHeader: FC<TSimpleListHeaderProp> = ({ text, leftText, rightText }) => {
   return (
-    <Box style={{ backgroundColor: xTheme.colors.listHeaderBG }}>
-      <Label style={styles.name} textType='bold'>{text}</Label>
+    <Box style={styles.container}>
+      {leftText !== '' || rightText !== ''
+        ? <Label style={styles.sideText} textType='light'>{leftText}</Label>
+        : <></>}
+      <Label style={styles.name} textType='medium'>{text}</Label>
+      {leftText !== '' || rightText !== ''
+        ? <Label style={styles.sideText} textType='light'>{rightText}</Label>
+        : <></>}
     </Box>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: xTheme.colors.listHeaderBG,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   name: {
-    width: '100%',
-    height: 22,
+    flex: 1,
     textAlign: 'center',
     fontSize: xTheme.fontSizes.headerLabel,
-    marginTop: 2,
+    marginVertical: 2,
+  },
+  sideText: {
+    width: 60,
+    textAlign: 'center',
+    fontSize: xTheme.fontSizes.headerLabel,
+    color: xTheme.colors.detail
   }
 })
 

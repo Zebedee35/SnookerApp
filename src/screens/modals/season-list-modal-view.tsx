@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { StyleSheet, TouchableOpacity, Modal, FlatList, Pressable } from 'react-native'
 
-import { ISeason } from '../types/apiTypes'
-import xTheme from '../utils/xTheme'
-import Box from './box'
-import Label from './label'
+import { ISeason } from '../../types/apiTypes'
+import xTheme from '../../utils/xTheme'
+import Box from '../../components/box'
+import Label from '../../components/label'
 
 type TSeasonListModalViewProps = {
   modalVisible: boolean,

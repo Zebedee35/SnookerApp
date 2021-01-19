@@ -36,6 +36,7 @@ const xTheme = {
     scoreListPlayerRank: 10,
 
     playerMatchesScore: 15,
+    pvpMatchesScore: 20,
 
     seasonListName: 22,
     seasonListDetail: 17,

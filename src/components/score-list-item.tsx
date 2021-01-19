@@ -13,9 +13,10 @@ type TScoreListItemProp = {
   item: IMatch
   bigSize?: boolean
   onPlayerSelected: (item: IPlayer) => void
+  onPVPSelected: (player1: IPlayer, player2: IPlayer) => void
 }
 
-const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false, onPlayerSelected }) => {
+const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false, onPlayerSelected, onPVPSelected }) => {
 
   const [matchState, setMatchState] = useState('')
 
@@ -66,7 +67,7 @@ const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false, onPlayer
 
         {/* Skor Panel */}
         <Pressable style={{ width: bigSize ? 130 : 85, height: '100%' }} onPress={() => {
-          console.log('SCORE: ' + item.players![0].score + ' - ' + item.players![1].score)
+          onPVPSelected(item.players![0], item.players![1])
         }}>
 
           <Box style={{ width: '100%', marginTop: 5, flexDirection: 'row' }}>

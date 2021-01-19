@@ -6,7 +6,8 @@ import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
 import ScoreListHeader from '../components/score-list-header'
-import PlayerDetailModalView from '../components/player-detail-modal-view'
+import PlayerDetailModalView from './modals/player-detail-modal-view'
+import PVPModalView from './modals/pvp-modal-view'
 
 import { IEvent, IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
@@ -16,9 +17,11 @@ function HomeScreen({ route, navigation }: HomeProps) {
   const [event, setEvent] = useState<IEvent>()
   const [rounds, setRounds] = useState<IRound[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
+  const [selectedPlayer2, setSelectedPlayer2] = useState<IPlayer>()
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
+  const [pvpModalVisible, setPvpModalVisible] = useState(false)
 
   const onRefresh = React.useCallback(() => {
     getCurrentTour()
@@ -42,6 +45,13 @@ function HomeScreen({ route, navigation }: HomeProps) {
     setSelectedPlayer(player)
     if (player.id !== '376')
       setPlayerModalVisible(true)
+  }
+
+  const showPVP = (player1: IPlayer, player2: IPlayer) => {
+    setSelectedPlayer(player1)
+    setSelectedPlayer2(player2)
+    if (player1.id !== '376' && player2.id !== '376')
+      setPvpModalVisible(true)
   }
 
   useEffect(() => {
@@ -71,9 +81,9 @@ function HomeScreen({ route, navigation }: HomeProps) {
         keyExtractor={(item) => item.recId}
         renderItem={({ item }) => {
           if (item.round === "15" || item.round === "14") {
-            return <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} />
+            return <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} onPVPSelected={showPVP} />
           }
-          return <ScoreListItem item={item} onPlayerSelected={showPlayerDetail} />
+          return <ScoreListItem item={item} onPlayerSelected={showPlayerDetail} onPVPSelected={showPVP} />
         }
         }
         renderSectionHeader={({ section: { name, round, distance, numLeft, loosersMoney, winnerMoney, currency } }) => (
@@ -91,6 +101,7 @@ function HomeScreen({ route, navigation }: HomeProps) {
 
       />
       <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
+      <PVPModalView modalVisible={pvpModalVisible} setModalVisible={setPvpModalVisible} player1={selectedPlayer} player2={selectedPlayer2} />
     </Box >
   )
 }

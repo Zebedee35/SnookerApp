@@ -107,9 +107,10 @@ export interface ILastestMatches {
   roundShort: string, // "F"
   ownerScore: string, // "10"
   playerScore: string, // "7"
-  playerId: string, // "85"
-  playerName: string, // "Jack Lisowski"
-  playerRank: string, // "14"
+  // buradan asagisi PVP'de yok
+  playerId?: string, // "85"
+  playerName?: string, // "Jack Lisowski"
+  playerRank?: string, // "14"
   playerCountryCode?: string, // "XE"
   playerPhotoURL?: string, // "http://35Coders.com/common/snooker/img/jack-lisowski.jpg"
 }

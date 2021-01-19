@@ -11,7 +11,7 @@ import snkrApi from '../api/snkrApi'
 import { IEvent, ISeason, ISeasons } from '../types/apiTypes'
 import SeasonListItem from '../components/season-list-item'
 import xTheme from '../utils/xTheme'
-import SeasonListModalView from '../components/season-list-modal-view'
+import SeasonListModalView from './modals/season-list-modal-view'
 
 function SeasonScreen({ route, navigation }: HomeProps) {
   const [response, setResponse] = useState<ISeasons>()

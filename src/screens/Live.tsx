@@ -6,7 +6,7 @@ import Box from '../components/box'
 import Label from '../components/label'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
-import PlayerDetailModalView from '../components/player-detail-modal-view'
+import PlayerDetailModalView from './modals/player-detail-modal-view'
 
 import { IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
