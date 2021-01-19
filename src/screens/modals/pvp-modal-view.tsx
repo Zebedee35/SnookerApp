@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Dimensions } from 'react-native'
 
 import xTheme from '../../utils/xTheme'
 import Box from '../../components/box'
@@ -56,8 +56,8 @@ const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, p
     >
       <Box style={styles.centeredView}>
 
-        {/* <Pressable style={styles.tapFrame} activeOpacity={1} onPress={() => {
-          setModalVisible(!modalVisible)
+        {/* <TouchableOpacity style={styles.tapFrame} activeOpacity={1} onPress={() => {
+          setModalVisible(false)
         }}> */}
         <Box style={styles.content}>
           {/* Header */}
@@ -74,8 +74,11 @@ const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, p
               <PlayerPhoto style={{ width: 100, height: 100 }} imgUri={player2?.photoURL} />
             </Box>
           </Box>
+          <Box style={styles.header}>
+            <Label textType='medium' style={styles.playerName}>{player1?.name}</Label>
+            <Label textType='medium' style={{ ...styles.playerName, textAlign: 'right' }}>{player2?.name}</Label>
+          </Box>
 
-          <Label textType='bold' style={styles.playerName}>{player1?.name}</Label>
           <Label textType='bold' style={styles.lastest}>All Matches</Label>
           <SectionList
             sections={games}
@@ -99,7 +102,7 @@ const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, p
             <Label style={styles.buttonText}> Close </Label>
           </TouchableOpacity>
         </Box>
-        {/* </Pressable> */}
+        {/* </TouchableOpacity> */}
       </Box>
     </Modal>
   )
@@ -125,7 +128,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     margin: 20,
-    height: 500,
+    maxHeight: Dimensions.get('window').height - 100,
+    height: 800,
+    maxWidth: 370,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: xTheme.borderRadius,
@@ -136,7 +141,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   playerName: {
-    fontSize: 20,
+    fontSize: xTheme.fontSizes.listItem,
+    flex: 1,
     color: xTheme.colors.text
   },
   caption: {

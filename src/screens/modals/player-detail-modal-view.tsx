@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Image, Dimensions } from 'react-native'
 
 import xTheme from '../../utils/xTheme'
 import Box from '../../components/box'
@@ -125,7 +125,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     margin: 20,
-    height: 500,
+    maxHeight: Dimensions.get('window').height - 100,
+    height: 800,
+    maxWidth: 370,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: xTheme.borderRadius,
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   playerName: {
-    fontSize: 20,
+    fontSize: xTheme.fontSizes.playerDetailName,
     color: xTheme.colors.text
   },
   caption: {

@@ -7,6 +7,7 @@ import Label from '../components/label'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import ScoreListItem from '../components/score-list-item'
 import PlayerDetailModalView from './modals/player-detail-modal-view'
+import PVPModalView from './modals/pvp-modal-view'
 
 import { IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
@@ -17,10 +18,11 @@ function LiveScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
   const [updateDate, setUpdateDate] = useState('')
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
+  const [selectedPlayer2, setSelectedPlayer2] = useState<IPlayer>()
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
-
+  const [pvpModalVisible, setPvpModalVisible] = useState(false)
 
   const onRefresh = React.useCallback(() => {
     getLiveScores()
@@ -51,6 +53,13 @@ function LiveScreen({ route, navigation }: HomeProps) {
       setPlayerModalVisible(true)
   }
 
+  const showPVP = (player1: IPlayer, player2: IPlayer) => {
+    setSelectedPlayer(player1)
+    setSelectedPlayer2(player2)
+    if (player1.id !== '376' && player2.id !== '376')
+      setPvpModalVisible(true)
+  }
+
   useEffect(() => {
     getLiveScores()
   }, [])
@@ -78,11 +87,12 @@ function LiveScreen({ route, navigation }: HomeProps) {
         : <SectionList
           sections={rounds}
           keyExtractor={(item) => item.recId}
-          renderItem={({ item }) => <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} />}
+          renderItem={({ item }) => <ScoreListItem item={item} bigSize={true} onPlayerSelected={showPlayerDetail} onPVPSelected={showPVP} />}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
 
       }
       <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
+      <PVPModalView modalVisible={pvpModalVisible} setModalVisible={setPvpModalVisible} player1={selectedPlayer} player2={selectedPlayer2} />
     </Box >
   )
 }
