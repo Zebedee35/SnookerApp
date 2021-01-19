@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     margin: 20,
-    maxHeight: Dimensions.get('window').height - 100,
+    maxHeight: Dimensions.get('window').height - 150,
     height: 800,
     maxWidth: 370,
     justifyContent: 'center',

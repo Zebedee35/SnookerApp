@@ -3,12 +3,14 @@ import { FlatList, RefreshControl, ScrollView, SectionList, StatusBar } from 're
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
+import Label from '../components/label'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
 import RankListItem from '../components/rank-list-item'
+import PlayerDetailModalView from './modals/player-detail-modal-view'
+
 import { IPlayer } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_rank from '../assets/bg_ranking.jpg'
-import Label from '../components/label'
 import xTheme from '../utils/xTheme'
 
 function RankScreen({ route, navigation }: HomeProps) {
@@ -16,6 +18,8 @@ function RankScreen({ route, navigation }: HomeProps) {
   const [updateDate, setUpdateDate] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
+  const [playerModalVisible, setPlayerModalVisible] = useState(false)
 
   const onRefresh = React.useCallback(() => {
     getPlayerRank()
@@ -38,6 +42,12 @@ function RankScreen({ route, navigation }: HomeProps) {
       console.log(err)
       setErrorMessage('Something whent wrong3')
     }
+  }
+
+  const showPlayerDetail = (player: IPlayer) => {
+    setSelectedPlayer(player)
+    if (player.id !== '376')
+      setPlayerModalVisible(true)
   }
 
   useEffect(() => {
@@ -67,9 +77,10 @@ function RankScreen({ route, navigation }: HomeProps) {
         : <FlatList
           data={players}
           keyExtractor={(item) => item.name! + item.id!}
-          renderItem={({ item }) => <RankListItem item={item} />}
+          renderItem={({ item }) => <RankListItem item={item} onPlayerSelected={showPlayerDetail} />}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
       }
+      <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
 
     </Box >
   )

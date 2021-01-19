@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { StyleSheet } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 
 import { IPlayer } from '../types/apiTypes'
 import xTheme from '../utils/xTheme'
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
 })
 
 type TRankListItemProp = {
-  item: IPlayer
+  item: IPlayer,
+  onPlayerSelected: (item: IPlayer) => void
 }
 
 const getLocalScore = (sScore: string) => {
@@ -34,18 +35,22 @@ const getLocalScore = (sScore: string) => {
   return '£ ' + iScore.toLocaleString()
 }
 
-const RankListItem: FC<TRankListItemProp> = ({ item }) => {
+const RankListItem: FC<TRankListItemProp> = ({ item, onPlayerSelected }) => {
 
   return (
     <Box style={{ flex: 1, flexDirection: 'row' }}>
-      <PlayerPhoto style={{ width: 80, height: 80 }} imgUri={item.photoURL} />
-      <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
-        <Label style={styles.name} textType='bold'>{item.name}</Label>
-        <Label style={styles.score}>{getLocalScore(item.score!)}</Label>
-      </Box>
-      <Box>
-        <Label style={styles.rank}>{item.rank}</Label>
-      </Box>
+      <Pressable style={{ flex: 1, flexDirection: 'row' }} onPress={() => {
+        onPlayerSelected(item)
+      }}>
+        <PlayerPhoto style={{ width: 80, height: 80 }} imgUri={item.photoURL} />
+        <Box style={{ flex: 1, justifyContent: 'center', paddingLeft: 10 }}>
+          <Label style={styles.name} textType='bold'>{item.name}</Label>
+          <Label style={styles.score}>{getLocalScore(item.score!)}</Label>
+        </Box>
+        <Box>
+          <Label style={styles.rank}>{item.rank}</Label>
+        </Box>
+      </Pressable>
     </Box>
   )
 }
