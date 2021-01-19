@@ -5,7 +5,9 @@
 Hello, This project is both a TypeScript exercise and a useful application. If you like Snooker like me or want to gain experience in TypeScript, let's develop the application together.
 
 The main screens are as follows.
-<img src="imgGitHub/MainScreens.png">
+<img src="imgGitHub/MainScreens1.png">
+<img src="imgGitHub/MainScreens2.png">
+<img src="imgGitHub/MainScreens3.png">
 
 ### ToDo List
 - [x] Home Screen
