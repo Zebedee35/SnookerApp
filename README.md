@@ -10,8 +10,8 @@ The main screens are as follows.
 ### ToDo List
 - [x] Home Screen
 - [x] Home Screen: List Tournament Matches
-- [ ] Home Screen: Player vs Player Modal Page
-- [ ] Home Screen: Player Detail Modal Page
+- [x] Home Screen: Player vs Player Modal Page
+- [x] Home Screen: Player Detail Modal Page
 - [x] Live Score Screen: Live Version
 - [x] Live Score Screen: Offline Version
 - [x] Rankings Screen
