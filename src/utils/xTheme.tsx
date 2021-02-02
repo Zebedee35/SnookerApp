@@ -1,5 +1,7 @@
 const xTheme = {
   borderRadius: 8,
+  liveCircleSize: 22,
+  liveCircleDotSize: 12,
   colors: {
     text: '#000000',
     negative: '#FFFFFF',
@@ -32,7 +34,7 @@ const xTheme = {
 
     scoreListPlayerName: 13,
     scoreListStatusBig: 17,
-    scoreListStatusSmall: 11,
+    scoreListStatusSmall: 12,
     scoreListPlayerRank: 10,
 
     playerDetailName: 20,
