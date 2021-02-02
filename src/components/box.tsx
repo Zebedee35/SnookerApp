@@ -1,20 +1,15 @@
 import React, { FC } from 'react'
-import { StyleSheet, ViewStyle, View } from 'react-native'
+import { View } from 'react-native'
 
-const styles = StyleSheet.create({
-  default: {
 
-  }
-})
+type TBoxProps = React.ComponentProps<typeof View> & {
 
-type TBoxProps = {
-  style?: ViewStyle
 }
 
-const Box: FC<TBoxProps> = ({ children, style, ...props }) => {
+const Box: FC<TBoxProps> = props => {
   return (
-    <View style={[styles.default, style]} {...props}>
-      {children}
+    <View {...props} >
+
     </View>
   )
 }
