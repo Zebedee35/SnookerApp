@@ -2,17 +2,21 @@ import React, { FC } from 'react'
 import { StyleSheet } from 'react-native'
 
 import { ILastestMatches } from '../types/apiTypes'
-import xTheme from '../utils/xTheme'
 import Box from './box'
 import { LoseIcon, WinIcon } from './icons'
 import Label from './label'
 import PlayerPhoto from './player-photo'
+
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
+
 
 type TPlayerMatchListItemProp = {
   item: ILastestMatches
 }
 
 const PlayerMatchListItem: FC<TPlayerMatchListItemProp> = ({ item }) => {
+  const styles = customStyles(themes['dark']);
 
   return (
     <Box style={{ flexDirection: 'row' }}>
@@ -23,7 +27,7 @@ const PlayerMatchListItem: FC<TPlayerMatchListItemProp> = ({ item }) => {
       </Box>
       <Box style={styles.scoreBox}>
         <Label textType='bold' style={{ ...styles.scoreLabel, textAlign: 'right' }}>{item.ownerScore}</Label>
-        <Label style={{ color: xTheme.colors.detail, fontSize: xTheme.fontSizes.playerMatchesScore }}>-</Label>
+        <Label style={styles.scoreDash}>-</Label>
         <Label textType='bold' style={{ ...styles.scoreLabel, textAlign: 'left' }}>{item.playerScore}</Label>
       </Box>
       <PlayerPhoto style={{ width: 30, height: 30 }} imgUri={item.playerPhotoURL} />
@@ -36,7 +40,7 @@ const PlayerMatchListItem: FC<TPlayerMatchListItemProp> = ({ item }) => {
 export default PlayerMatchListItem
 
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   status: {
     width: 22,
     height: 22,
@@ -48,20 +52,24 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scoreLabel: {
-    color: xTheme.colors.score,
+    color: t.score,
     width: 25,
-    fontSize: xTheme.fontSizes.playerMatchesScore,
+    fontSize: consts.fontSizes.playerMatchesScore,
+  },
+  scoreDash: {
+    color: t.score,
+    fontSize: consts.fontSizes.playerMatchesScore
   },
   playerName: {
     flex: 1,
     marginLeft: 5,
     marginTop: 5,
-    color: xTheme.colors.text,
-    fontSize: xTheme.fontSizes.scoreListPlayerName,
+    color: t.text,
+    fontSize: consts.fontSizes.scoreListPlayerName,
   },
   round: {
-    color: xTheme.colors.detail,
-    fontSize: xTheme.fontSizes.scoreListPlayerName,
+    color: t.detail,
+    fontSize: consts.fontSizes.scoreListPlayerName,
     marginTop: 5,
   }
 

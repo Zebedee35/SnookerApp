@@ -1,19 +1,8 @@
-const xTheme = {
+const consts = {
   borderRadius: 8,
   liveCircleSize: 22,
   liveCircleDotSize: 12,
-  colors: {
-    text: '#000000',
-    negative: '#FFFFFF',
-    listHeaderBG: '#DFE2E7',
-    score: '#64AC1E',
-    live: '#96120D',
-    detail: '#9c9c9c',
-    yellow: '#F323f5',
-    tabBar: '#64AC1E',
-    modalWindow: '#FFFFFF',
-    modalTransparentBackground: 'rgba(0, 0, 0, 0.7)'
-  },
+
   fontSizes: {
     listItem: 17,
     listItemDetail: 15,
@@ -22,7 +11,7 @@ const xTheme = {
 
     groupHeader: 18,
 
-    rankName: 24,
+    rankName: 23,
     rankScore: 17,
     rankRank: 48,
 
@@ -48,4 +37,4 @@ const xTheme = {
   }
 }
 
-export default xTheme
+export default consts

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, RefreshControl, StatusBar, TouchableOpacity } from 'react-native'
+import { FlatList, RefreshControl, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Box from '../components/box'
 import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
@@ -10,8 +10,10 @@ import Label from '../components/label'
 import snkrApi from '../api/snkrApi'
 import { IEvent, ISeason, ISeasons } from '../types/apiTypes'
 import SeasonListItem from '../components/season-list-item'
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
 import SeasonListModalView from './modals/season-list-modal-view'
+
+import { Theme, themes } from '../utils/Themes'
 
 function SeasonScreen({ route, navigation }: HomeProps) {
   const [response, setResponse] = useState<ISeasons>()
@@ -21,6 +23,8 @@ function SeasonScreen({ route, navigation }: HomeProps) {
   const [selectedSeasonText, setSelectedSeasonText] = useState('')
   const [loading, setLoading] = useState(false)
   const [sesionModalVisible, setSesionModalVisible] = useState(false);
+
+  const styles = customStyles(themes['dark']);
 
   const getSeasons = async () => {
     try {
@@ -84,7 +88,7 @@ function SeasonScreen({ route, navigation }: HomeProps) {
   }, [])
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={styles.background}>
       <StatusBar barStyle='light-content' />
       <Header>
         <HeaderImage imageUri={bg_season} />
@@ -93,7 +97,7 @@ function SeasonScreen({ route, navigation }: HomeProps) {
           <HeaderBottom>
             <Box style={{ alignItems: 'center' }}>
               <TouchableOpacity onPress={onPressSeasons}
-                style={{ flexDirection: 'row', backgroundColor: xTheme.colors.tabBar, padding: 8, borderRadius: xTheme.borderRadius }}>
+                style={styles.listItem}>
                 <Label style={{ fontSize: 18 }} >{selectedSeasonText}</Label>
               </TouchableOpacity>
             </Box>
@@ -116,3 +120,16 @@ function SeasonScreen({ route, navigation }: HomeProps) {
 }
 
 export default SeasonScreen
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listBG,
+    flex: 1
+  },
+  listItem: {
+    flexDirection: 'row',
+    backgroundColor: t.tabBar,
+    padding: 8,
+    borderRadius: consts.borderRadius
+  },
+})

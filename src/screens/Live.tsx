@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { RefreshControl, ScrollView, SectionList, StatusBar, Image } from 'react-native'
+import { RefreshControl, ScrollView, SectionList, StatusBar, Image, StyleSheet } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
@@ -12,7 +12,8 @@ import PVPModalView from './modals/pvp-modal-view'
 import { IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_live from '../assets/bg_live.jpg'
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 function LiveScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
@@ -23,6 +24,8 @@ function LiveScreen({ route, navigation }: HomeProps) {
   const [loading, setLoading] = useState(false)
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
   const [pvpModalVisible, setPvpModalVisible] = useState(false)
+
+  const styles = customStyles(themes['dark']);
 
   const onRefresh = React.useCallback(() => {
     getLiveScores()
@@ -66,7 +69,7 @@ function LiveScreen({ route, navigation }: HomeProps) {
 
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={styles.background}>
       <StatusBar barStyle='light-content' />
       <Header>
         <HeaderImage imageUri={bg_live} />
@@ -81,7 +84,7 @@ function LiveScreen({ route, navigation }: HomeProps) {
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
           <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
             <Image source={require('../assets/closed.png')} />
-            <Label style={{ fontSize: xTheme.fontSizes.listItem }}>There is no live matches now!</Label>
+            <Label style={{ fontSize: consts.fontSizes.listItem }}>There is no live matches now!</Label>
           </Box>
         </ScrollView>
         : <SectionList
@@ -92,9 +95,16 @@ function LiveScreen({ route, navigation }: HomeProps) {
 
       }
       <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
-      <PVPModalView modalVisible={pvpModalVisible} setModalVisible={setPvpModalVisible} player1={selectedPlayer} player2={selectedPlayer2} />
+      <PVPModalView modalVisible={pvpModalVisible} setModalVisible={setPvpModalVisible} player1={selectedPlayer!} player2={selectedPlayer2!} />
     </Box >
   )
 }
 
 export default LiveScreen
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listBG,
+    flex: 1
+  },
+})

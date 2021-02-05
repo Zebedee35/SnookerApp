@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { StyleSheet, ViewStyle, View, ImageBackground, ImageSourcePropType } from 'react-native'
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
 import Box from './box'
 import Label, { LabelHeader } from './label'
 
@@ -82,8 +82,8 @@ const HeaderTop: FC<THeaderTopProps> = ({ children, title, line2, line3, ...prop
   return (
     <Box style={{ flex: 1, alignItems: 'center' }} {...props}>
       <LabelHeader style={{ marginTop: 35 }}>{title}</LabelHeader>
-      <LabelHeader style={{ marginTop: 5, fontSize: xTheme.fontSizes.listItem }}>{line2}</LabelHeader>
-      <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem }}>{line3}</LabelHeader>
+      <LabelHeader style={{ marginTop: 5, fontSize: consts.fontSizes.listItem }}>{line2}</LabelHeader>
+      <LabelHeader style={{ fontSize: consts.fontSizes.listItem }}>{line3}</LabelHeader>
     </Box>
   )
 }
@@ -92,12 +92,12 @@ const HeaderTop: FC<THeaderTopProps> = ({ children, title, line2, line3, ...prop
 const HeaderBottom: FC<THeaderBottomProps> = ({ children, leftText, middleText, rightText, ...props }) => {
   return (
     <Box style={{ flexDirection: 'row', marginBottom: 5 }} {...props}>
-      <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, marginLeft: 10 }}>{leftText}</LabelHeader>
+      <LabelHeader style={{ fontSize: consts.fontSizes.listItem, marginLeft: 10 }}>{leftText}</LabelHeader>
       {!middleText || middleText === ''
         ? <Box style={{ flex: 1 }}>{children}</Box>
-        : <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, flex: 1 }}>{middleText}</LabelHeader>
+        : <LabelHeader style={{ fontSize: consts.fontSizes.listItem, flex: 1 }}>{middleText}</LabelHeader>
       }
-      <LabelHeader style={{ fontSize: xTheme.fontSizes.listItem, marginRight: 10 }}>{rightText}</LabelHeader>
+      <LabelHeader style={{ fontSize: consts.fontSizes.listItem, marginRight: 10 }}>{rightText}</LabelHeader>
     </Box>
   )
 }

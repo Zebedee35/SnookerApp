@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Dimensions } from 'react-native'
 
-import xTheme from '../../utils/xTheme'
 import Box from '../../components/box'
 import Label from '../../components/label'
 import PlayerPhoto from '../../components/player-photo'
@@ -11,6 +10,9 @@ import { IPlayer, IPlayerLastestMatches, ILastestEvents } from '../../types/apiT
 import SimpleListHeader from '../../components/simple-list-header'
 import PVPMatchListItem from '../../components/pvp-match-list-item'
 import { VersusIcon } from '../../components/icons'
+
+import consts from '../../utils/Consts'
+import { Theme, themes } from '../../utils/Themes'
 
 
 type TPVPModalViewProps = {
@@ -23,6 +25,8 @@ type TPVPModalViewProps = {
 const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, player1, player2, children }) => {
   const [lastest, setLastest] = useState<IPlayerLastestMatches>()
   const [games, setGames] = useState<ILastestEvents[]>()
+
+  const styles = customStyles(themes['dark']);
 
   const getPVP = async (p1id: string, p2id: string) => {
     try {
@@ -110,12 +114,12 @@ const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, p
 
 export default PVPModalView
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: xTheme.colors.modalTransparentBackground
+    backgroundColor: t.modalTransparentBackground
   },
   tapFrame: {
     flex: 1,
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    backgroundColor: 'white',
+    backgroundColor: t.modalWindow,
     padding: 20,
     margin: 20,
     maxHeight: Dimensions.get('window').height - 150,
@@ -133,7 +137,7 @@ const styles = StyleSheet.create({
     maxWidth: 370,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: xTheme.borderRadius,
+    borderRadius: consts.borderRadius,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
   header: {
@@ -141,38 +145,38 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   playerName: {
-    fontSize: xTheme.fontSizes.listItem,
+    fontSize: consts.fontSizes.listItem,
     flex: 1,
-    color: xTheme.colors.text
+    color: t.text
   },
   caption: {
     fontSize: 12,
     textAlign: 'center',
     marginTop: 10,
-    color: xTheme.colors.detail,
+    color: t.detail,
   },
   value: {
     fontSize: 16,
     textAlign: 'center',
-    color: xTheme.colors.text,
+    color: t.text,
   },
   lastest: {
     fontSize: 18,
     textAlign: 'center',
-    color: xTheme.colors.live,
+    color: t.live,
     marginTop: 15,
   },
   sideBox: {
     flex: 1,
   },
   closeButton: {
-    backgroundColor: xTheme.colors.tabBar,
-    borderRadius: xTheme.borderRadius,
+    backgroundColor: t.tabBar,
+    borderRadius: consts.borderRadius,
     marginTop: 20,
     padding: 10
   },
   buttonText: {
-    color: xTheme.colors.negative,
+    color: t.textOposite,
     textAlign: "center",
     fontSize: 16
   },

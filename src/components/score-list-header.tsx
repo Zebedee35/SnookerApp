@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { StyleSheet } from 'react-native'
 
 import Box from './box'
 import Label from './label'
 import Utils from '../utils/Utils'
-import xTheme from '../utils/xTheme'
+import { Theme, themes } from '../utils/Themes'
+import consts from '../utils/Consts'
 
 
 type TScoreListHeaderProp = {
@@ -18,10 +19,10 @@ type TScoreListHeaderProp = {
 }
 
 const ScoreListHeader: FC<TScoreListHeaderProp> = ({ name, round, distance, numLeft, loosersMoney, winnerMoney, currency }) => {
-
+  const styles = customStyles(themes['dark']);
 
   return (
-    <Box style={{ backgroundColor: xTheme.colors.listHeaderBG }}>
+    <Box style={styles.background}>
       <Label style={styles.name} textType='bold'>{name}</Label>
       <Label style={styles.detail}>
         (
@@ -35,20 +36,24 @@ const ScoreListHeader: FC<TScoreListHeaderProp> = ({ name, round, distance, numL
     </Box>
   )
 }
-
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listHeaderBG
+  },
   name: {
     width: '100%',
     height: 30,
     textAlign: 'center',
-    fontSize: xTheme.fontSizes.roundHeaderTitle,
+    fontSize: consts.fontSizes.roundHeaderTitle,
+    color: t.text,
     marginTop: 2,
   },
   detail: {
     width: '100%',
     height: 20,
     textAlign: 'center',
-    fontSize: xTheme.fontSizes.roundHeaderDetail,
+    fontSize: consts.fontSizes.roundHeaderDetail,
+    color: t.detail,
     marginTop: -3,
   }
 })

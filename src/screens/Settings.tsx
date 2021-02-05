@@ -11,7 +11,8 @@ import bg_settings from '../assets/bg_settings.jpg'
 import SettingsItem from '../components/settings-list-item'
 import SettingsSwitchItem from '../components/settings-list-switch-item'
 
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 import RadioGroup, { RadioGroupItem } from '../components/radioGroup'
 import { FeedbackIcon, ShareIcon, SnookerOrg, StarIcon, WebIcon } from '../components/icons'
@@ -21,6 +22,8 @@ function SettingsScreen({ route, navigation }: HomeProps) {
   const [notify, setNotify] = useState<RadioGroupItem>()
   const [darkMode, setDarkMode] = useState(true)
   const [hideTbd, setHideTbd] = useState(true)
+
+  const styles = customStyles(themes['dark']);
 
   const notifyItems: RadioGroupItem[] = [
     { id: 0, name: 'All Results' },
@@ -116,7 +119,7 @@ function SettingsScreen({ route, navigation }: HomeProps) {
   }, [])
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={styles.background}>
       <StatusBar barStyle='light-content' />
       <Header>
         <HeaderImage imageUri={bg_settings} />
@@ -180,3 +183,10 @@ function SettingsScreen({ route, navigation }: HomeProps) {
 }
 
 export default SettingsScreen
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    flex: 1,
+    backgroundColor: t.bgColor
+  }
+})

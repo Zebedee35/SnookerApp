@@ -3,9 +3,11 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import Moment from 'moment'
 
 import { IEvent } from '../types/apiTypes'
-import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
+
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 type TSeasonListItemProp = {
   item: IEvent
@@ -43,6 +45,7 @@ const isPastEvent = (item: IEvent) => {
 }
 
 const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
+  const styles = customStyles(themes['dark']);
 
   return (
     <TouchableOpacity>
@@ -61,25 +64,26 @@ const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
 
 export default SeasonListItem
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   name: {
-    fontSize: xTheme.fontSizes.seasonListName,
+    color: t.text,
+    fontSize: consts.fontSizes.seasonListName,
     marginTop: 0
   },
   detail: {
-    color: xTheme.colors.detail,
-    fontSize: xTheme.fontSizes.seasonListDetail,
+    color: t.detail,
+    fontSize: consts.fontSizes.seasonListDetail,
     marginTop: 1
   },
   datePass: {
-    color: xTheme.colors.detail,
+    color: t.detail,
     textAlign: 'center',
-    fontSize: xTheme.fontSizes.seasonListDate
+    fontSize: consts.fontSizes.seasonListDate
   },
   dateFuture: {
-    color: xTheme.colors.score,
+    color: t.tabBar,
     textAlign: 'center',
     fontWeight: '600',
-    fontSize: xTheme.fontSizes.seasonListDate
+    fontSize: consts.fontSizes.seasonListDate
   },
 })

@@ -3,7 +3,8 @@ import { Animated, StyleSheet, Easing } from 'react-native'
 
 import Box from './box'
 import Label from './label'
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 import { Clock, useCode, Value } from 'react-native-reanimated'
 
 
@@ -18,6 +19,7 @@ const Live: FC<TLiveProps> = (props) => {
   // } = props
   const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
   const [isVisible, setVisible] = useState(false)
+  const styles = customStyles(themes['dark']);
 
   // const liveAnim = () => {
   //   Animated.timing(fadeAnim, {
@@ -60,47 +62,49 @@ const Live: FC<TLiveProps> = (props) => {
         </Box>
         // </Animated.View>
       }
-      <Label style={props.bigSize ? styles.msLiveBig : styles.msLive}>live</Label>
+      <Label style={props.bigSize ? styles.msLiveBig : styles.msLive}>LIVE</Label>
     </Box>
   )
 }
 
 export default Live;
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   msLive: {
-    color: xTheme.colors.live,
-    fontSize: xTheme.fontSizes.scoreListStatusSmall,
+    color: t.live,
+    fontSize: consts.fontSizes.scoreListStatusSmall,
+    fontWeight: '600',
     textAlign: 'center',
     marginTop: 0,
     marginLeft: 5
   },
   msLiveBig: {
-    color: xTheme.colors.live,
-    fontSize: xTheme.fontSizes.scoreListStatusBig,
+    color: t.live,
+    fontSize: consts.fontSizes.scoreListStatusBig,
+    fontWeight: '600',
     textAlign: 'center',
     marginTop: 1,
     marginLeft: 5
   },
   circle: {
-    height: xTheme.liveCircleSize,
-    width: xTheme.liveCircleSize,
+    height: consts.liveCircleSize,
+    width: consts.liveCircleSize,
     borderRadius: 999,
     borderWidth: 2,
-    borderColor: xTheme.colors.live,
+    borderColor: t.live,
     alignItems: 'center',
     justifyContent: 'center',
   },
   dot: {
-    height: xTheme.liveCircleDotSize,
-    width: xTheme.liveCircleDotSize,
+    height: consts.liveCircleDotSize,
+    width: consts.liveCircleDotSize,
     borderRadius: 999,
-    backgroundColor: xTheme.colors.live,
+    backgroundColor: t.live,
     alignItems: 'center',
     justifyContent: 'center',
   },

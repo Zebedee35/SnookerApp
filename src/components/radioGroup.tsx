@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import xTheme from '../utils/xTheme';
 import Box from './box';
 import Label from './label';
+
+import consts from '../utils/Consts';
+import { Theme, themes } from '../utils/Themes'
 
 export type RadioGroupItem = {
   id: number;
@@ -22,13 +24,14 @@ export type RadioButtonProps = {
 };
 
 const RadioButton = (props: RadioButtonProps) => {
+  const styles = customStyles(themes['dark']);
   const { item, selected, onSelected } = props;
 
   return (
     <TouchableOpacity
       style={styles.radioButton}
       onPress={() => onSelected(item)}>
-      <Label style={{ fontSize: xTheme.fontSizes.listItem }}>{item.name}</Label>
+      <Label style={styles.label}>{item.name}</Label>
       <Box style={styles.button}>
         {selected?.id === item.id && <Box style={styles.selectedButton} />}
       </Box>
@@ -58,12 +61,13 @@ const RadioGroup = (props: RadioGroupProps) => {
 };
 
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   radioButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 12,
+    backgroundColor: t.listBG,
   },
   button: {
     height: 24,
@@ -78,8 +82,12 @@ const styles = StyleSheet.create({
     width: 14,
     height: 14,
     borderRadius: 14,
-    backgroundColor: '#1976d2',
+    backgroundColor: t.tabBar,
   },
+  label: {
+    fontSize: consts.fontSizes.listItem,
+    color: t.text,
+  }
 });
 
 export { RadioButton };

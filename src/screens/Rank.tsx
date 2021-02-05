@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, RefreshControl, ScrollView, SectionList, StatusBar } from 'react-native'
+import { FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
@@ -11,7 +11,8 @@ import PlayerDetailModalView from './modals/player-detail-modal-view'
 import { IPlayer } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_rank from '../assets/bg_ranking.jpg'
-import xTheme from '../utils/xTheme'
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 function RankScreen({ route, navigation }: HomeProps) {
   const [players, setPlayers] = useState<IPlayer[]>([])
@@ -20,6 +21,8 @@ function RankScreen({ route, navigation }: HomeProps) {
   const [loading, setLoading] = useState(false)
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
+
+  const styles = customStyles(themes['dark']);
 
   const onRefresh = React.useCallback(() => {
     getPlayerRank()
@@ -56,7 +59,7 @@ function RankScreen({ route, navigation }: HomeProps) {
 
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={styles.background}>
       <StatusBar barStyle='light-content' />
       <Header>
         <HeaderImage imageUri={bg_rank} />
@@ -71,7 +74,7 @@ function RankScreen({ route, navigation }: HomeProps) {
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
           <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
             {/* picture will come here. */}
-            <Label style={{ fontSize: xTheme.fontSizes.listItem }}>There is no data!</Label>
+            <Label style={{ fontSize: consts.fontSizes.listItem }}>There is no data!</Label>
           </Box>
         </ScrollView>
         : <FlatList
@@ -87,3 +90,10 @@ function RankScreen({ route, navigation }: HomeProps) {
 }
 
 export default RankScreen
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listBG,
+    flex: 1
+  },
+})

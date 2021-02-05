@@ -2,9 +2,11 @@ import React, { FC } from 'react'
 import { StyleSheet, TouchableOpacity, Modal, FlatList, Pressable } from 'react-native'
 
 import { ISeason } from '../../types/apiTypes'
-import xTheme from '../../utils/xTheme'
 import Box from '../../components/box'
 import Label from '../../components/label'
+
+import consts from '../../utils/Consts'
+import { Theme, themes } from '../../utils/Themes'
 
 type TSeasonListModalViewProps = {
   modalVisible: boolean,
@@ -14,6 +16,7 @@ type TSeasonListModalViewProps = {
 }
 
 const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, dataList, onSeasonSelected, setModalVisible }) => {
+  const styles = customStyles(themes['dark']);
 
   return <Modal animationType='fade' transparent={true}
     visible={modalVisible}
@@ -31,7 +34,7 @@ const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, data
             data={dataList}
             keyExtractor={(item) => { return '' + item.season }}
             renderItem={({ item }) => <TouchableOpacity style={{ height: 40 }} onPress={() => onSeasonSelected(item)}>
-              <Label style={{ flex: 1, fontSize: 16, textAlign: 'center' }}>{item.season}</Label>
+              <Label style={styles.listItem}>{item.season}</Label>
             </TouchableOpacity>}
             style={{ width: 100 }} />
           <TouchableOpacity
@@ -51,12 +54,12 @@ const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, data
 
 export default SeasonListModalView
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: xTheme.colors.modalTransparentBackground
+    backgroundColor: t.modalTransparentBackground
   },
   tapFrame: {
     flex: 1,
@@ -64,12 +67,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  listItem: {
+    color: t.text,
+    flex: 1,
+    fontSize: 16,
+    textAlign: 'center'
+  },
   modalView: {
     margin: 2,
     width: 200,
     height: 350,
-    backgroundColor: xTheme.colors.modalWindow,
-    borderRadius: xTheme.borderRadius,
+    backgroundColor: t.modalWindow,
+    borderRadius: consts.borderRadius,
     padding: 15,
     alignItems: "center",
     shadowColor: "#000",
@@ -82,17 +91,18 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   closeButton: {
-    backgroundColor: xTheme.colors.tabBar,
-    borderRadius: xTheme.borderRadius,
+    backgroundColor: t.tabBar,
+    borderRadius: consts.borderRadius,
     marginTop: 20,
     padding: 10
   },
   buttonText: {
-    color: xTheme.colors.negative,
+    color: t.textOposite,
     textAlign: "center",
     fontSize: 16
   },
   modalText: {
+    color: t.text,
     marginBottom: 15,
     textAlign: "center",
     fontSize: 18

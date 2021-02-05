@@ -2,28 +2,12 @@ import React, { FC } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 
 import { IPlayer } from '../types/apiTypes'
-import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
 import PlayerPhoto from './player-photo'
 
-const styles = StyleSheet.create({
-  name: {
-    fontSize: xTheme.fontSizes.rankName,
-    marginTop: 0
-  },
-  score: {
-    color: xTheme.colors.detail,
-    fontSize: xTheme.fontSizes.rankScore,
-    marginTop: 5
-  },
-  rank: {
-    fontSize: xTheme.fontSizes.rankRank,
-    textAlign: 'center',
-    color: xTheme.colors.detail,
-    marginRight: 10
-  }
-})
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 type TRankListItemProp = {
   item: IPlayer,
@@ -36,6 +20,7 @@ const getLocalScore = (sScore: string) => {
 }
 
 const RankListItem: FC<TRankListItemProp> = ({ item, onPlayerSelected }) => {
+  const styles = customStyles(themes['dark']);
 
   return (
     <Box style={{ flex: 1, flexDirection: 'row' }}>
@@ -56,3 +41,22 @@ const RankListItem: FC<TRankListItemProp> = ({ item, onPlayerSelected }) => {
 }
 
 export default RankListItem
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  name: {
+    color: t.text,
+    fontSize: consts.fontSizes.rankName,
+    marginTop: 0
+  },
+  score: {
+    color: t.detail,
+    fontSize: consts.fontSizes.rankScore,
+    marginTop: 5
+  },
+  rank: {
+    fontSize: consts.fontSizes.rankRank,
+    textAlign: 'center',
+    color: t.detail,
+    marginRight: 10
+  }
+})

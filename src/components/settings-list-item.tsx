@@ -1,14 +1,12 @@
 import React, { FC } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 
-import xTheme from '../utils/xTheme'
 import Box from './box'
 import Label from './label'
 import { NextIcon1 } from './icons'
 
-const styles = StyleSheet.create({
-
-})
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 type TSettingsItemProps = {
   title: string,
@@ -18,29 +16,44 @@ type TSettingsItemProps = {
 }
 
 const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, onPress, children }) => {
+  const selectedTheme = themes['dark']
+  const styles = customStyles(selectedTheme);
+
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={styles.background}>
       <Box style={{ height: bigSize ? 70 : 48, flexDirection: 'row', alignItems: 'center' }}>
         <Box style={{ marginLeft: 10, marginRight: 5, height: bigSize ? 64 : 30, width: bigSize ? 64 : 30 }}>
           {children}
         </Box>
         <Box style={{ marginLeft: 10, flex: 1 }}>
           {!detail || detail == ''
-            ? <Label style={{ fontSize: xTheme.fontSizes.listItem, height: bigSize ? 64 : 30 }}>{title}</Label>
+            ? <Label style={[styles.label, { height: bigSize ? 64 : 30 }]}>{title}</Label>
             : <Box>
-              <Label style={{ fontSize: xTheme.fontSizes.listItem }}>{title}</Label>
-              <Label style={{ fontSize: xTheme.fontSizes.listItemDetail, color: xTheme.colors.detail }}>{detail}</Label>
+              <Label style={styles.label}>{title}</Label>
+              <Label style={styles.labelDetail}>{detail}</Label>
             </Box>
           }
         </Box>
         <Box style={{ width: 25, height: 25, marginRight: 15 }}>
-          <NextIcon1 color={xTheme.colors.detail} />
+          <NextIcon1 color={selectedTheme.tabBar} />
         </Box>
       </Box>
     </TouchableOpacity>
   )
 }
 
-
-
 export default SettingsItem
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listBG
+  },
+  label: {
+    fontSize: consts.fontSizes.listItem,
+    color: t.text,
+  },
+  labelDetail: {
+    fontSize: consts.fontSizes.listItemDetail,
+    color: t.detail,
+  }
+})

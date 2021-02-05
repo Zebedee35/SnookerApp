@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native'
 
 import Box from './box'
 import Label from './label'
-import xTheme from '../utils/xTheme'
+
+import consts from '../utils/Consts'
+import { Theme, themes } from '../utils/Themes'
 
 
 type TSimpleListHeaderProp = {
@@ -13,6 +15,8 @@ type TSimpleListHeaderProp = {
 }
 
 const SimpleListHeader: FC<TSimpleListHeaderProp> = ({ text, leftText, rightText }) => {
+  const styles = customStyles(themes['dark']);
+
   return (
     <Box style={styles.container}>
       {leftText !== '' || rightText !== ''
@@ -26,23 +30,24 @@ const SimpleListHeader: FC<TSimpleListHeaderProp> = ({ text, leftText, rightText
   )
 }
 
-const styles = StyleSheet.create({
+const customStyles = (t: Theme) => StyleSheet.create({
   container: {
-    backgroundColor: xTheme.colors.listHeaderBG,
+    backgroundColor: t.listHeaderBG,
     flexDirection: 'row',
     alignItems: 'center'
   },
   name: {
+    color: t.text,
     flex: 1,
     textAlign: 'center',
-    fontSize: xTheme.fontSizes.headerLabel,
+    fontSize: consts.fontSizes.headerLabel,
     marginVertical: 2,
   },
   sideText: {
+    color: t.detail,
     width: 60,
     textAlign: 'center',
-    fontSize: xTheme.fontSizes.headerLabel,
-    color: xTheme.colors.detail
+    fontSize: consts.fontSizes.headerLabel,
   }
 })
 

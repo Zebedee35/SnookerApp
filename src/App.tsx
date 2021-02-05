@@ -12,15 +12,22 @@ import SettingsScreen from './screens/Settings'
 import SeasonScreen from './screens/Season'
 
 import { HomeIcon, SeasonIcon, SettingsIcon, RankingIcon, LiveIcon } from './components/icons/index'
-import xTheme from './utils/xTheme'
+import { themes } from './utils/Themes'
 
 const Tab = createBottomTabNavigator();
 
-
 const App = () => {
+  const styles = themes['dark'];
+
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home" tabBarOptions={{ activeTintColor: xTheme.colors.tabBar }}>
+    <NavigationContainer >
+      <Tab.Navigator initialRouteName="Home" tabBarOptions={{
+        activeTintColor: styles.tabBar,
+        style: {
+          backgroundColor: styles.bgColor,
+        },
+      }}
+      >
         <Tab.Screen name='Seasons' component={SeasonScreen} options={{
           tabBarIcon: ({ color }) => (
             <SeasonIcon color={color} />

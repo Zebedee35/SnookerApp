@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { RefreshControl, SectionList, StatusBar } from 'react-native'
+import { RefreshControl, SectionList, StatusBar, StyleSheet } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
 import Box from '../components/box'
@@ -12,6 +12,7 @@ import PVPModalView from './modals/pvp-modal-view'
 import { IEvent, IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_home from '../assets/bg_home.jpg'
+import { Theme, themes } from '../utils/Themes'
 
 function HomeScreen({ route, navigation }: HomeProps) {
   const [event, setEvent] = useState<IEvent>()
@@ -22,6 +23,8 @@ function HomeScreen({ route, navigation }: HomeProps) {
   const [loading, setLoading] = useState(false)
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
   const [pvpModalVisible, setPvpModalVisible] = useState(false)
+
+  const styles = customStyles(themes['dark']);
 
   const onRefresh = React.useCallback(() => {
     getCurrentTour()
@@ -62,7 +65,7 @@ function HomeScreen({ route, navigation }: HomeProps) {
   }, [])
 
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={styles.background}>
       <StatusBar barStyle='light-content' />
       <Header>
         <HeaderImage imageUri={bg_home} />
@@ -107,3 +110,10 @@ function HomeScreen({ route, navigation }: HomeProps) {
 }
 
 export default HomeScreen
+
+const customStyles = (t: Theme) => StyleSheet.create({
+  background: {
+    backgroundColor: t.listBG,
+    flex: 1
+  },
+})
