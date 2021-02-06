@@ -23,7 +23,7 @@ The main screens are as follows.
 - [x] Settings Screen
 - [ ] Adding country flags 
 - [ ] Animation for 'Live' text
-- [ ] Dark Theme
+- [x] Dark Theme
 - [ ] Hide TBD Matches
 - [ ] Notification Settings
 
