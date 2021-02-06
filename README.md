@@ -9,7 +9,7 @@ The main screens are as follows.
 <img src="imgGitHub/MainScreens2.png">
 <img src="imgGitHub/MainScreens3.png">
 
-### ToDo List
+### Completed Tasks
 - [x] Home Screen
 - [x] Home Screen: List Tournament Matches
 - [x] Home Screen: Player vs Player Modal Page
@@ -19,11 +19,13 @@ The main screens are as follows.
 - [x] Rankings Screen
 - [x] Seasons Screen 
 - [x] Seasons Screen: Selection of previous seasons  
-- [ ] Seasons Screen: Tournament selection from the session list
 - [x] Settings Screen
+- [x] Dark Theme
+
+### ToDo List
+- [ ] Seasons Screen: Tournament selection from the session list
 - [ ] Adding country flags 
 - [ ] Animation for 'Live' text
-- [x] Dark Theme
 - [ ] Hide TBD Matches
 - [ ] Notification Settings
 
