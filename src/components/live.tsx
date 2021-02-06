@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useContext, useEffect, useRef, useState } from 'react'
 import { Animated, StyleSheet, Easing } from 'react-native'
 
 import Box from './box'
 import Label from './label'
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 import { Clock, useCode, Value } from 'react-native-reanimated'
 
 
@@ -19,7 +19,8 @@ const Live: FC<TLiveProps> = (props) => {
   // } = props
   const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
   const [isVisible, setVisible] = useState(false)
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   // const liveAnim = () => {
   //   Animated.timing(fadeAnim, {

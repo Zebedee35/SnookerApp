@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet, TouchableOpacity, Modal, FlatList, Pressable } from 'react-native'
 
 import { ISeason } from '../../types/apiTypes'
@@ -6,7 +6,7 @@ import Box from '../../components/box'
 import Label from '../../components/label'
 
 import consts from '../../utils/Consts'
-import { Theme, themes } from '../../utils/Themes'
+import { Theme, ThemeContext } from '../../utils/Themes'
 
 type TSeasonListModalViewProps = {
   modalVisible: boolean,
@@ -16,7 +16,8 @@ type TSeasonListModalViewProps = {
 }
 
 const SeasonListModalView: FC<TSeasonListModalViewProps> = ({ modalVisible, dataList, onSeasonSelected, setModalVisible }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return <Modal animationType='fade' transparent={true}
     visible={modalVisible}

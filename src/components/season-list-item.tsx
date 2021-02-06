@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import Moment from 'moment'
 
@@ -7,7 +7,7 @@ import Box from './box'
 import Label from './label'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TSeasonListItemProp = {
   item: IEvent
@@ -45,7 +45,8 @@ const isPastEvent = (item: IEvent) => {
 }
 
 const SeasonListItem: FC<TSeasonListItemProp> = ({ item }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useContext } from 'react'
 import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Dimensions } from 'react-native'
 
 import Box from '../../components/box'
@@ -12,7 +12,7 @@ import PVPMatchListItem from '../../components/pvp-match-list-item'
 import { VersusIcon } from '../../components/icons'
 
 import consts from '../../utils/Consts'
-import { Theme, themes } from '../../utils/Themes'
+import { Theme, ThemeContext } from '../../utils/Themes'
 
 
 type TPVPModalViewProps = {
@@ -26,7 +26,8 @@ const PVPModalView: FC<TPVPModalViewProps> = ({ modalVisible, setModalVisible, p
   const [lastest, setLastest] = useState<IPlayerLastestMatches>()
   const [games, setGames] = useState<ILastestEvents[]>()
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const getPVP = async (p1id: string, p2id: string) => {
     try {

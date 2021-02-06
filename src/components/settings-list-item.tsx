@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 
 import Box from './box'
@@ -6,7 +6,7 @@ import Label from './label'
 import { NextIcon1 } from './icons'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TSettingsItemProps = {
   title: string,
@@ -16,8 +16,8 @@ type TSettingsItemProps = {
 }
 
 const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, onPress, children }) => {
-  const selectedTheme = themes['dark']
-  const styles = customStyles(selectedTheme);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.background}>
@@ -35,7 +35,7 @@ const SettingsItem: FC<TSettingsItemProps> = ({ title, detail, bigSize = false, 
           }
         </Box>
         <Box style={{ width: 25, height: 25, marginRight: 15 }}>
-          <NextIcon1 color={selectedTheme.tabBar} />
+          <NextIcon1 color={currentTheme.tabBar} />
         </Box>
       </Box>
     </TouchableOpacity>

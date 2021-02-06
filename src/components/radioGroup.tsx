@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import Box from './box';
 import Label from './label';
 
 import consts from '../utils/Consts';
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 export type RadioGroupItem = {
   id: number;
@@ -24,7 +24,8 @@ export type RadioButtonProps = {
 };
 
 const RadioButton = (props: RadioButtonProps) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
   const { item, selected, onSelected } = props;
 
   return (

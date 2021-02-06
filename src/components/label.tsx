@@ -1,16 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import Box from './box'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TLabelProps = React.ComponentProps<typeof Text> & {
   textType?: 'regular' | 'bold' | 'light' | 'medium'
 }
 
 const Label: FC<TLabelProps> = ({ children, textType, ...props }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme)
   const { style, ...restOfProps } = props
 
   let textStyle = {}
@@ -40,7 +41,8 @@ const Label: FC<TLabelProps> = ({ children, textType, ...props }) => {
 }
 
 const LabelHeader: FC<TLabelProps> = ({ children, textType, ...props }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme)
   const { style, ...restOfProps } = props
 
   let textStyle = {}
@@ -55,7 +57,8 @@ const LabelHeader: FC<TLabelProps> = ({ children, textType, ...props }) => {
 }
 
 const SettingHeader: FC<TLabelProps> = ({ children }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme)
 
   return (
     <Box style={styles.groupHeaderBox}>

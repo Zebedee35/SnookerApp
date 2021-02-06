@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { RefreshControl, SectionList, StatusBar, StyleSheet } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
@@ -12,7 +12,7 @@ import PVPModalView from './modals/pvp-modal-view'
 import { IEvent, IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_home from '../assets/bg_home.jpg'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 function HomeScreen({ route, navigation }: HomeProps) {
   const [event, setEvent] = useState<IEvent>()
@@ -24,7 +24,9 @@ function HomeScreen({ route, navigation }: HomeProps) {
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
   const [pvpModalVisible, setPvpModalVisible] = useState(false)
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
+
 
   const onRefresh = React.useCallback(() => {
     getCurrentTour()

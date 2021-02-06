@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 
 import { IPlayer } from '../types/apiTypes'
@@ -7,7 +7,7 @@ import Label from './label'
 import PlayerPhoto from './player-photo'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TRankListItemProp = {
   item: IPlayer,
@@ -20,7 +20,8 @@ const getLocalScore = (sScore: string) => {
 }
 
 const RankListItem: FC<TRankListItemProp> = ({ item, onPlayerSelected }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <Box style={{ flex: 1, flexDirection: 'row' }}>

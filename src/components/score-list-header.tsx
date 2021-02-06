@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 import Box from './box'
 import Label from './label'
 import Utils from '../utils/Utils'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 import consts from '../utils/Consts'
 
 
@@ -19,7 +19,8 @@ type TScoreListHeaderProp = {
 }
 
 const ScoreListHeader: FC<TScoreListHeaderProp> = ({ name, round, distance, numLeft, loosersMoney, winnerMoney, currency }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <Box style={styles.background}>

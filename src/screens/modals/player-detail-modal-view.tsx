@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useContext } from 'react'
 import { StyleSheet, TouchableOpacity, Pressable, Modal, SectionList, Image, Dimensions } from 'react-native'
 
 import Box from '../../components/box'
@@ -11,7 +11,7 @@ import SimpleListHeader from '../../components/simple-list-header'
 import PlayerMatchListItem from '../../components/player-match-list-item'
 
 import consts from '../../utils/Consts'
-import { Theme, themes } from '../../utils/Themes'
+import { Theme, ThemeContext } from '../../utils/Themes'
 
 type TPlayerDetailModalViewProps = {
   modalVisible: boolean,
@@ -23,7 +23,8 @@ const PlayerDetailModalView: FC<TPlayerDetailModalViewProps> = ({ modalVisible, 
   const [lastest, setLastest] = useState<IPlayerLastestMatches>()
   const [games, setGames] = useState<ILastestEvents[]>()
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const getLastestMatches = async (id: string) => {
     try {

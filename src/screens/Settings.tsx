@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StatusBar, StyleSheet, FlatList, Linking, Share, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import InAppReview from "react-native-in-app-review";
@@ -12,7 +12,7 @@ import SettingsItem from '../components/settings-list-item'
 import SettingsSwitchItem from '../components/settings-list-switch-item'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext, themes } from '../utils/Themes'
 
 import RadioGroup, { RadioGroupItem } from '../components/radioGroup'
 import { FeedbackIcon, ShareIcon, SnookerOrg, StarIcon, WebIcon } from '../components/icons'
@@ -23,7 +23,8 @@ function SettingsScreen({ route, navigation }: HomeProps) {
   const [darkMode, setDarkMode] = useState(true)
   const [hideTbd, setHideTbd] = useState(true)
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme, setCurrentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const notifyItems: RadioGroupItem[] = [
     { id: 0, name: 'All Results' },
@@ -43,11 +44,17 @@ function SettingsScreen({ route, navigation }: HomeProps) {
   const storeDarkModeData = async (value: boolean) => {
     try {
       {
-        value
-          ? await AsyncStorage.setItem('@darkMode', '1')
-          : await AsyncStorage.setItem('@darkMode', '0')
+        setDarkMode(value)
+        if (value) {
+          await AsyncStorage.setItem('@darkMode', '1')
+          setCurrentTheme(themes['dark'])
+        }
+        else {
+          await AsyncStorage.setItem('@darkMode', '0')
+          setCurrentTheme(themes['light'])
+        }
       }
-      setDarkMode(value)
+
     } catch (e) {
       // saving error
     }
@@ -71,10 +78,7 @@ function SettingsScreen({ route, navigation }: HomeProps) {
       if (vNotify !== null) {
         setNotify(notifyItems[Number(vNotify)])
       }
-      const vDarkMode = await AsyncStorage.getItem('@darkMode')
-      if (vDarkMode !== null) {
-        setDarkMode(vDarkMode !== '0')
-      }
+      setDarkMode(currentTheme == themes['dark'])
       const vTBD = await AsyncStorage.getItem('@TBD')
       if (vTBD !== null) {
         setHideTbd(vTBD !== '0')

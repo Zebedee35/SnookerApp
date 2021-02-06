@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet, Switch } from 'react-native'
 
 import Box from './box'
 import Label from './label'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TSettingsSwitchItemProps = {
   title: string,
@@ -14,7 +14,9 @@ type TSettingsSwitchItemProps = {
 }
 
 const SettingsSwitchItem: FC<TSettingsSwitchItemProps> = ({ title, currValue, onValueChange }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
+
   return (
     <Box style={styles.background}>
       <Box style={{ marginLeft: 10, flex: 1 }}>

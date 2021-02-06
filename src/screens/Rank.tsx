@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
@@ -12,7 +12,7 @@ import { IPlayer } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_rank from '../assets/bg_ranking.jpg'
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 function RankScreen({ route, navigation }: HomeProps) {
   const [players, setPlayers] = useState<IPlayer[]>([])
@@ -22,7 +22,8 @@ function RankScreen({ route, navigation }: HomeProps) {
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const onRefresh = React.useCallback(() => {
     getPlayerRank()

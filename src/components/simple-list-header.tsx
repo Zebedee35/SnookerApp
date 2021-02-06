@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 import Box from './box'
 import Label from './label'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 
 type TSimpleListHeaderProp = {
@@ -15,7 +15,8 @@ type TSimpleListHeaderProp = {
 }
 
 const SimpleListHeader: FC<TSimpleListHeaderProp> = ({ text, leftText, rightText }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <Box style={styles.container}>

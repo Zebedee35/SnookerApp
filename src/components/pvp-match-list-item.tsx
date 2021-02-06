@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 import { ILastestMatches } from '../types/apiTypes'
@@ -7,14 +7,15 @@ import { LoseIcon, WinIcon } from './icons'
 import Label from './label'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 type TPVPListItemProp = {
   item: ILastestMatches
 }
 
 const PVPMatchListItem: FC<TPVPListItemProp> = ({ item }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <Box style={styles.background}>

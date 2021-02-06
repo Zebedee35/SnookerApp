@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FlatList, RefreshControl, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Box from '../components/box'
@@ -13,7 +13,7 @@ import SeasonListItem from '../components/season-list-item'
 import consts from '../utils/Consts'
 import SeasonListModalView from './modals/season-list-modal-view'
 
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 function SeasonScreen({ route, navigation }: HomeProps) {
   const [response, setResponse] = useState<ISeasons>()
@@ -24,7 +24,8 @@ function SeasonScreen({ route, navigation }: HomeProps) {
   const [loading, setLoading] = useState(false)
   const [sesionModalVisible, setSesionModalVisible] = useState(false);
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const getSeasons = async () => {
     try {

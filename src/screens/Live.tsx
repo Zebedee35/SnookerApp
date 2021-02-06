@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { RefreshControl, ScrollView, SectionList, StatusBar, Image, StyleSheet } from 'react-native'
 import snkrApi from '../api/snkrApi'
 
@@ -13,7 +13,7 @@ import { IPlayer, IRound } from '../types/apiTypes'
 import { HomeProps } from '../types/navTypes'
 import bg_live from '../assets/bg_live.jpg'
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 function LiveScreen({ route, navigation }: HomeProps) {
   const [rounds, setRounds] = useState<IRound[]>([])
@@ -25,7 +25,8 @@ function LiveScreen({ route, navigation }: HomeProps) {
   const [playerModalVisible, setPlayerModalVisible] = useState(false)
   const [pvpModalVisible, setPvpModalVisible] = useState(false)
 
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   const onRefresh = React.useCallback(() => {
     getLiveScores()

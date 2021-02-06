@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { Image, StyleSheet, Pressable } from 'react-native'
 
 import { IMatch, IPlayer } from '../types/apiTypes'
@@ -9,7 +9,7 @@ import Label from './label'
 import PlayerPhoto from './player-photo'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 
 type TScoreListItemProp = {
@@ -23,7 +23,8 @@ type TScoreListItemProp = {
 const ScoreListItem: FC<TScoreListItemProp> = ({ item, bigSize = false, onPlayerSelected, onPVPSelected }) => {
 
   const [matchState, setMatchState] = useState('')
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   useEffect(() => {
     const sMatchState = Utils.instance.getMatchState(item);

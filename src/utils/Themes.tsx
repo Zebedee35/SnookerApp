@@ -1,3 +1,4 @@
+import React from 'react'
 
 export type Theme = {
   text: string,
@@ -51,3 +52,5 @@ export const themes: Themes = {
     textOposite: '#FFFFFF',
   },
 };
+
+export const ThemeContext = React.createContext(themes['light'])

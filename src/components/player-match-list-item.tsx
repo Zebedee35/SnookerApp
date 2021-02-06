@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 import { ILastestMatches } from '../types/apiTypes'
@@ -8,7 +8,7 @@ import Label from './label'
 import PlayerPhoto from './player-photo'
 
 import consts from '../utils/Consts'
-import { Theme, themes } from '../utils/Themes'
+import { Theme, ThemeContext } from '../utils/Themes'
 
 
 type TPlayerMatchListItemProp = {
@@ -16,7 +16,8 @@ type TPlayerMatchListItemProp = {
 }
 
 const PlayerMatchListItem: FC<TPlayerMatchListItemProp> = ({ item }) => {
-  const styles = customStyles(themes['dark']);
+  const { currentTheme } = useContext(ThemeContext)
+  const styles = customStyles(currentTheme);
 
   return (
     <Box style={{ flexDirection: 'row' }}>
