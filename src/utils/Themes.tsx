@@ -1,19 +1,19 @@
-import React from 'react'
+import React from 'react';
 
 export type Theme = {
-  text: string,
-  bgColor: string,
-  textOposite: string,
-  listHeaderBG: string,
-  listBG: string,
-  score: string,
-  live: string,
-  detail: string,
-  tabBar: string,
-  modalWindow: string,
+  text: string;
+  bgColor: string;
+  textOpposite: string;
+  listHeaderBG: string;
+  listBG: string;
+  score: string;
+  live: string;
+  detail: string;
+  tabBar: string;
+  modalWindow: string;
   modalTransparentBackground: string;
-  tabBarTransparentBG: string,
-}
+  tabBarTransparentBG: string;
+};
 
 export type Themes = {
   dark: Theme;
@@ -34,7 +34,7 @@ export const themes: Themes = {
     modalTransparentBackground: 'rgba(0, 0, 0, 0.7)',
     tabBarTransparentBG: 'rgba(255, 255, 255, 0.3)',
 
-    textOposite: '#000000',
+    textOpposite: '#000000',
   },
   light: {
     text: '#000000',
@@ -49,8 +49,18 @@ export const themes: Themes = {
     modalTransparentBackground: 'rgba(0, 0, 0, 0.7)',
     tabBarTransparentBG: 'rgba(0, 0, 0, 0.7)',
 
-    textOposite: '#FFFFFF',
+    textOpposite: '#FFFFFF',
   },
 };
 
-export const ThemeContext = React.createContext(themes['light'])
+export type ThemeContextState = {
+  user: Theme;
+  setUser: (data: Theme) => void;
+};
+
+export const themeContextDefaultValues: ThemeContextState = {
+  user: themes.light,
+  setUser: () => {},
+};
+
+export const ThemeContext = React.createContext<ThemeContextState>(themeContextDefaultValues);

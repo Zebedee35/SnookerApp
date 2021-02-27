@@ -33,8 +33,7 @@ const consts = {
     seasonListName: 22,
     seasonListDetail: 17,
     seasonListDate: 18,
-
-  }
-}
+  },
+};
 
 export default consts

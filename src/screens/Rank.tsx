@@ -1,100 +1,102 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar } from 'react-native'
-import snkrApi from '../api/snkrApi'
+import React, {useState, useEffect, useContext} from 'react';
+import {FlatList, RefreshControl, ScrollView, StyleSheet, StatusBar} from 'react-native';
+import snkrApi from '../api/snkrApi';
 
-import Box from '../components/box'
-import Label from '../components/label'
-import Header, { HeaderBottom, HeaderContainer, HeaderImage, HeaderTop } from '../components/header'
-import RankListItem from '../components/rank-list-item'
-import PlayerDetailModalView from './modals/player-detail-modal-view'
+import Box from '../components/box';
+import Label from '../components/label';
+import Header, {HeaderBottom, HeaderContainer, HeaderImage, HeaderTop} from '../components/header';
+import RankListItem from '../components/rank-list-item';
+import PlayerDetailModalView from './modals/player-detail-modal-view';
 
-import { IPlayer } from '../types/apiTypes'
-import { HomeProps } from '../types/navTypes'
-import bg_rank from '../assets/bg_ranking.jpg'
-import consts from '../utils/Consts'
-import { Theme, ThemeContext } from '../utils/Themes'
+import {IPlayer} from '../types/apiTypes';
+import {HomeProps} from '../types/navTypes';
+import bg_rank from '../assets/bg_ranking.jpg';
+import consts from '../utils/Consts';
+import {Theme, ThemeContext} from '../utils/Themes';
 
-function RankScreen({ route, navigation }: HomeProps) {
-  const [players, setPlayers] = useState<IPlayer[]>([])
-  const [updateDate, setUpdateDate] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>()
-  const [playerModalVisible, setPlayerModalVisible] = useState(false)
+function RankScreen({route, navigation}: HomeProps) {
+  const [players, setPlayers] = useState<IPlayer[]>([]);
+  const [updateDate, setUpdateDate] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>();
+  const [playerModalVisible, setPlayerModalVisible] = useState(false);
 
-  const { currentTheme } = useContext(ThemeContext)
+  const {currentTheme} = useContext(ThemeContext);
   const styles = customStyles(currentTheme);
 
   const onRefresh = React.useCallback(() => {
-    getPlayerRank()
-  }, [loading])
+    getPlayerRank();
+  }, [loading]);
 
   const getPlayerRank = async () => {
     try {
-      setLoading(true)
-      setUpdateDate('loading...')
+      setLoading(true);
+      setUpdateDate('loading...');
       const response = await snkrApi.get('ranks', {
-        params: {
-
-        }
-      })
-      setUpdateDate('')
-      setPlayers(response.data)
-      setLoading(false)
+        params: {},
+      });
+      setUpdateDate('');
+      setPlayers(response.data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setErrorMessage('Something whent wrong3');
     }
-    catch (err) {
-      console.log(err)
-      setErrorMessage('Something whent wrong3')
-    }
-  }
+  };
 
   const showPlayerDetail = (player: IPlayer) => {
-    setSelectedPlayer(player)
-    if (player.id !== '376')
-      setPlayerModalVisible(true)
-  }
+    setSelectedPlayer(player);
+    if (player.id !== '376') setPlayerModalVisible(true);
+  };
 
   useEffect(() => {
-    getPlayerRank()
-  }, [])
-
+    getPlayerRank();
+  }, []);
 
   return (
     <Box style={styles.background}>
-      <StatusBar barStyle='light-content' />
+      <StatusBar barStyle="light-content" />
       <Header>
         <HeaderImage imageUri={bg_rank} />
         <HeaderContainer>
-          <HeaderTop title='Rankings' />
+          <HeaderTop title="Rankings" />
           <HeaderBottom rightText={updateDate} />
         </HeaderContainer>
       </Header>
 
-      {!players || players.length === 0
-        ? <ScrollView style={{ flex: 1 }}
+      {!players || players.length === 0 ? (
+        <ScrollView
+          style={{flex: 1}}
           refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}>
-          <Box style={{ flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
+          <Box style={{flex: 1, marginTop: 100, alignItems: 'center', justifyContent: 'center'}}>
             {/* picture will come here. */}
-            <Label style={{ fontSize: consts.fontSizes.listItem }}>There is no data!</Label>
+            <Label style={{fontSize: consts.fontSizes.listItem}}>There is no data!</Label>
           </Box>
         </ScrollView>
-        : <FlatList
+      ) : (
+        <FlatList
           data={players}
           keyExtractor={(item) => item.name! + item.id!}
-          renderItem={({ item }) => <RankListItem item={item} onPlayerSelected={showPlayerDetail} />}
-          refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />} />
-      }
-      <PlayerDetailModalView modalVisible={playerModalVisible} setModalVisible={setPlayerModalVisible} player={selectedPlayer} />
-
-    </Box >
-  )
+          renderItem={({item}) => <RankListItem item={item} onPlayerSelected={showPlayerDetail} />}
+          refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}
+        />
+      )}
+      <PlayerDetailModalView
+        modalVisible={playerModalVisible}
+        setModalVisible={setPlayerModalVisible}
+        player={selectedPlayer}
+      />
+    </Box>
+  );
 }
 
-export default RankScreen
+export default RankScreen;
 
-const customStyles = (t: Theme) => StyleSheet.create({
-  background: {
-    backgroundColor: t.listBG,
-    flex: 1
-  },
-})
+const customStyles = (t: Theme) =>
+  StyleSheet.create({
+    background: {
+      backgroundColor: t.listBG,
+      flex: 1,
+    },
+  });
