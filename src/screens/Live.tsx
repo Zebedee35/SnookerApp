@@ -60,7 +60,18 @@ function LiveScreen({route, navigation}: HomeProps) {
   };
 
   useEffect(() => {
-    getLiveScores();
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      getLiveScores();
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    // getLiveScores();
   }, []);
 
   return (

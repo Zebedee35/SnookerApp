@@ -31,6 +31,21 @@ function HomeScreen({route, navigation}: HomeProps) {
     getCurrentTour();
   }, [loading]);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      getCurrentTour();
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    // getCurrentTour();
+  }, []);
+
   const getCurrentTour = async () => {
     try {
       setLoading(true);
@@ -55,12 +70,6 @@ function HomeScreen({route, navigation}: HomeProps) {
     setSelectedPlayer2(player2);
     if (player1.id !== '376' && player2.id !== '376') setPvpModalVisible(true);
   };
-
-  useEffect(() => {}, [event]);
-
-  useEffect(() => {
-    getCurrentTour();
-  }, []);
 
   return (
     <Box style={styles.background}>
