@@ -54,13 +54,13 @@ export const themes: Themes = {
 };
 
 export type ThemeContextState = {
-  user: Theme;
-  setUser: (data: Theme) => void;
+  currentTheme: Theme;
+  setCurrentTheme: (data: Theme) => void;
 };
 
 export const themeContextDefaultValues: ThemeContextState = {
-  user: themes.light,
-  setUser: () => {},
+  currentTheme: themes.light,
+  setCurrentTheme: () => {},
 };
 
 export const ThemeContext = React.createContext<ThemeContextState>(themeContextDefaultValues);
