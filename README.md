@@ -21,12 +21,12 @@ The main screens are as follows.
 - [x] Seasons Screen: Selection of previous seasons  
 - [x] Settings Screen
 - [x] Dark Theme
+- [x] Hide TBD Matches
 
 ### ToDo List
 - [ ] Seasons Screen: Tournament selection from the session list
 - [ ] Adding country flags 
 - [ ] Animation for 'Live' text
-- [ ] Hide TBD Matches
 - [ ] Notification Settings
 
 ### API Documentation
