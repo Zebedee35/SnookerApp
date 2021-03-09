@@ -2,31 +2,9 @@ import React, {FC} from 'react';
 import {StyleSheet, ViewStyle, View, ImageBackground, ImageSourcePropType} from 'react-native';
 import consts from '../utils/Consts';
 import Box from './box';
-import Label, {LabelHeader} from './label';
+import {LabelHeader} from './label';
 
 const HEADER_HEIGHT = 180;
-
-const styles = StyleSheet.create({
-  default: {
-    height: HEADER_HEIGHT,
-  },
-  image: {
-    height: HEADER_HEIGHT,
-    width: '100%',
-  },
-  darker: {
-    backgroundColor: '#000000',
-    width: '100%',
-    height: '100%',
-    opacity: 0.3,
-  },
-  container: {
-    zIndex: 1,
-    position: 'absolute',
-    width: '100%',
-    height: HEADER_HEIGHT,
-  },
-});
 
 type THeaderProps = {
   style?: ViewStyle;
@@ -109,3 +87,25 @@ const HeaderBottom: FC<THeaderBottomProps> = ({
 
 export default Header;
 export {HeaderImage, HeaderContainer, HeaderTop, HeaderBottom};
+
+const styles = StyleSheet.create({
+  default: {
+    height: HEADER_HEIGHT,
+  },
+  image: {
+    height: HEADER_HEIGHT,
+    width: '100%',
+  },
+  darker: {
+    width: '100%',
+    height: '100%',
+    opacity: 0.3,
+    backgroundColor: '#000000',
+  },
+  container: {
+    zIndex: 1,
+    position: 'absolute',
+    width: '100%',
+    height: HEADER_HEIGHT,
+  },
+});

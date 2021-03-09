@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {RefreshControl, SectionList, StatusBar, StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import snkrApi from '../api/snkrApi';
 
 import Box from '../components/box';
@@ -49,7 +51,18 @@ function HomeScreen({route, navigation}: HomeProps) {
   const getCurrentTour = async () => {
     try {
       setLoading(true);
-      const response = await snkrApi.get('tournament', {});
+      let showTBD = false
+      const vTBD = await AsyncStorage.getItem('@TBD');
+      if (vTBD !== null) {
+        showTBD = vTBD !== '0';
+      }
+
+      const response = await snkrApi.get('tournament', {
+        params: {
+          hide: showTBD,
+        },
+      });
+
       setEvent(response.data.event);
       setRounds(response.data.rounds);
       setLoading(false);
